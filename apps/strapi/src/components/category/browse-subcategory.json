@@ -1,0 +1,21 @@
+{
+  "collectionName": "components_category_browse_subcategories",
+  "info": {
+    "displayName": "Browse subcategory",
+    "description": "Child shelf under a browse category"
+  },
+  "attributes": {
+    "childId": {
+      "type": "string",
+      "required": true
+    },
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "href": {
+      "type": "string",
+      "required": true
+    }
+  }
+}

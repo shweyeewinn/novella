@@ -16,6 +16,12 @@ export type OrderLineItem = {
   unitCents: number;
 };
 
+export type PaymentProof = {
+  filename: string;
+  mimeType: string;
+  uploadedAt: string;
+};
+
 export type Order = {
   id: string;
   userId: string | null;
@@ -27,6 +33,7 @@ export type Order = {
   createdAt: string;
   updatedAt: string;
   trackingNote?: string;
+  paymentProof?: PaymentProof;
 };
 
 export type CreateOrderInput = {

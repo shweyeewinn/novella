@@ -15,21 +15,11 @@ type Variant = keyof typeof variants;
 type ButtonProps = ComponentProps<"button"> & { variant?: Variant };
 
 export function Button({ variant = "primary", className = "", ...props }: ButtonProps) {
-  return (
-    <button
-      type="button"
-      className={`${variants[variant]} ${className}`}
-      {...props}
-    />
-  );
+  return <button type="button" className={`${variants[variant]} ${className}`} {...props} />;
 }
 
 type ButtonLinkProps = ComponentProps<typeof Link> & { variant?: Variant };
 
-export function ButtonLink({
-  variant = "primary",
-  className = "",
-  ...props
-}: ButtonLinkProps) {
+export function ButtonLink({ variant = "primary", className = "", ...props }: ButtonLinkProps) {
   return <Link className={`${variants[variant]} ${className}`} {...props} />;
 }

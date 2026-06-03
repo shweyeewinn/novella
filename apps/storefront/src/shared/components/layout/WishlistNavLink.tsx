@@ -18,14 +18,15 @@ function selectWishlistCount(state: { bookIds: string[] }): number {
 }
 
 export default function WishlistNavLink() {
-  const mounted = useSyncExternalStore(subscribeNoop, () => true, () => false);
+  const mounted = useSyncExternalStore(
+    subscribeNoop,
+    () => true,
+    () => false
+  );
   const count = useWishlistStore(selectWishlistCount);
   const showCount = mounted && count > 0;
 
-  const ariaLabel =
-    count > 0
-      ? `Wishlist, ${count} ${count === 1 ? "book" : "books"}`
-      : "Wishlist";
+  const ariaLabel = count > 0 ? `Wishlist, ${count} ${count === 1 ? "book" : "books"}` : "Wishlist";
 
   return (
     <Link

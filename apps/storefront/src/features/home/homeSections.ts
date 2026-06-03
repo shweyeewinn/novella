@@ -112,12 +112,8 @@ function booksForSection(sectionId: string): Book[] {
 
   const pool = getAllBooks().filter((b) => !b.collections?.length);
   if (pool.length === 0) return [];
-  const start =
-    homeBookSections.findIndex((s) => s.id === sectionId) % pool.length;
-  return Array.from(
-    { length: BOOKS_PER_SECTION },
-    (_, i) => pool[(start + i) % pool.length]
-  );
+  const start = homeBookSections.findIndex((s) => s.id === sectionId) % pool.length;
+  return Array.from({ length: BOOKS_PER_SECTION }, (_, i) => pool[(start + i) % pool.length]);
 }
 
 /** Section shelves — pre-order uses fixed catalog; others rotate demo titles until CMS. */

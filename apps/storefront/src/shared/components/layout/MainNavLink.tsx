@@ -18,12 +18,7 @@ type MainNavLinkProps = {
   onNavigate?: () => void;
 };
 
-export default function MainNavLink({
-  href,
-  label,
-  className = "",
-  onNavigate,
-}: MainNavLinkProps) {
+export default function MainNavLink({ href, label, className = "", onNavigate }: MainNavLinkProps) {
   const pathname = usePathname();
   const active = isNavItemActive(pathname, href);
 
@@ -33,9 +28,7 @@ export default function MainNavLink({
       onClick={onNavigate}
       aria-current={active ? "page" : undefined}
       className={`${baseClass} ${
-        active
-          ? "font-semibold text-primary"
-          : "text-ink-muted hover:text-primary"
+        active ? "font-semibold text-primary" : "text-ink-muted hover:text-primary"
       } ${className}`}
     >
       {label}

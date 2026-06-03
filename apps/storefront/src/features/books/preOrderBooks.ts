@@ -6,8 +6,7 @@ export const preOrderBooks: Book[] = [
     slug: "son-mat-myar-pre-order",
     title: "ဆုံမှတ်များ (Pre Order)",
     author: "မှူး",
-    description:
-      "Sally Rooney’s Normal People in Burmese—pre-order now. Ships when stock arrives.",
+    description: "Sally Rooney’s Normal People in Burmese—pre-order now. Ships when stock arrives.",
     priceCents: 2800,
     format: "physical",
     category: "fiction",

@@ -15,6 +15,9 @@ jobs:
         with:
           node-version: "20"
           cache: npm
-      - run: npm ci
+          cache-dependency-path: package-lock.json
+      - run: npm ci --include=optional
+      - name: Rebuild Tailwind native modules for Linux
+        run: npm rebuild -w storefront
       - run: npm run check
       - run: npm run build

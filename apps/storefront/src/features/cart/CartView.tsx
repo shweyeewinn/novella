@@ -42,10 +42,7 @@ export default function CartView() {
       <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_min(320px,100%)] lg:gap-10">
         <ul className="min-w-0 divide-y divide-border">
           {lines.map(({ book, quantity, lineTotalCents }) => (
-            <li
-              key={book.id}
-              className="flex flex-col gap-4 py-6 first:pt-0 min-[400px]:flex-row"
-            >
+            <li key={book.id} className="flex flex-col gap-4 py-6 first:pt-0 min-[400px]:flex-row">
               <Link href={`/books/${book.slug}`} className="shrink-0 self-start">
                 <BookCover book={book} size="sm" />
               </Link>
@@ -119,9 +116,7 @@ export default function CartView() {
               </div>
             ) : null}
             {hasDigital && hasPhysical ? (
-              <p className="text-xs text-ink-muted">
-                Digital downloads are emailed after payment.
-              </p>
+              <p className="text-xs text-ink-muted">Digital downloads are emailed after payment.</p>
             ) : null}
             <div className="flex justify-between border-t border-border pt-3 font-medium text-ink">
               <dt>Estimated total</dt>

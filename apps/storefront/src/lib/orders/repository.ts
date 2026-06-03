@@ -1,5 +1,5 @@
 import { readJsonStore, writeJsonStore } from "@/lib/data/jsonStore";
-import type { CreateOrderInput, Order, OrderStatus } from "@/types/order";
+import type { CreateOrderInput, Order, OrderStatus, PaymentProof } from "@/types/order";
 
 const STORE = "orders";
 
@@ -18,10 +18,7 @@ export function createOrderId(): string {
   return `NOV-${Date.now().toString(36).toUpperCase()}`;
 }
 
-export async function createOrder(
-  id: string,
-  input: CreateOrderInput
-): Promise<Order> {
+export async function createOrder(id: string, input: CreateOrderInput): Promise<Order> {
   const now = new Date().toISOString();
   const order: Order = {
     id,
@@ -40,17 +37,17 @@ export async function findOrderById(id: string): Promise<Order | null> {
   return orders.find((o) => o.id === id) ?? null;
 }
 
-export async function listOrdersForUser(
-  userId: string,
-  email: string
-): Promise<Order[]> {
+export async function listAllOrders(): Promise<Order[]> {
+  const orders = await load();
+  return orders.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
+}
+
+export async function listOrdersForUser(userId: string, email: string): Promise<Order[]> {
   const normalized = email.trim().toLowerCase();
   const orders = await load();
   return orders
     .filter(
-      (o) =>
-        o.userId === userId ||
-        (normalized && o.email.trim().toLowerCase() === normalized)
+      (o) => o.userId === userId || (normalized && o.email.trim().toLowerCase() === normalized)
     )
     .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
 }
@@ -67,6 +64,26 @@ export async function updateOrderStatus(
     ...orders[idx],
     status,
     trackingNote: trackingNote ?? orders[idx].trackingNote,
+    updatedAt: new Date().toISOString(),
+  };
+  await save(orders);
+  return orders[idx];
+}
+
+export async function attachPaymentProofToOrder(
+  orderId: string,
+  proof: PaymentProof
+): Promise<Order | null> {
+  const orders = await load();
+  const idx = orders.findIndex((o) => o.id === orderId);
+  if (idx < 0) return null;
+
+  const status = orders[idx].status === "pending_payment" ? "payment_review" : orders[idx].status;
+
+  orders[idx] = {
+    ...orders[idx],
+    paymentProof: proof,
+    status,
     updatedAt: new Date().toISOString(),
   };
   await save(orders);

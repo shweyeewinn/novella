@@ -25,8 +25,7 @@ export const newReleaseBooks: Book[] = [
     slug: "grade-12-english-old-questions",
     title: "ဒွါဒသမတန်း English Old Questions For Three Years (24) sets",
     author: "Unknow Author",
-    description:
-      "Grade 12 English—old entrance exam questions for 2024, 2025, and 2026 (24 sets).",
+    description: "Grade 12 English—old entrance exam questions for 2024, 2025, and 2026 (24 sets).",
     priceCents: 4500,
     format: "physical",
     category: "nonfiction",
@@ -115,8 +114,7 @@ export const newReleaseBooks: Book[] = [
     slug: "lu-taing-ah-yone-tha-ma",
     title: "လူတိုင်း အရောင်းသမား",
     author: "ဒီပါ",
-    description:
-      "To Sell is Human—Burmese edition translated by Depa (Daniel H. Pink).",
+    description: "To Sell is Human—Burmese edition translated by Depa (Daniel H. Pink).",
     priceCents: 4200,
     format: "physical",
     category: "nonfiction",
@@ -133,8 +131,7 @@ export const newReleaseBooks: Book[] = [
     slug: "pyin-yin-hkin-ma-shi-pa",
     title: "ပျင်းရိခြင်းဆိုတာ မရှိပါ",
     author: "လူသာ",
-    description:
-      "Laziness Does Not Exist—Burmese translation by Lu Thar (Devon Price, Ph.D.).",
+    description: "Laziness Does Not Exist—Burmese translation by Lu Thar (Devon Price, Ph.D.).",
     priceCents: 4000,
     format: "physical",
     category: "nonfiction",

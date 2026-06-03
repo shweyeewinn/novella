@@ -69,9 +69,7 @@ export default function OrderCard({ order }: OrderCardProps) {
 
       <p className="mt-4 flex justify-between border-t border-border pt-4 font-sans text-sm">
         <span className="font-medium text-ink">Total</span>
-        <span className="font-semibold tabular-nums text-ink">
-          {formatPrice(order.totalCents)}
-        </span>
+        <span className="font-semibold tabular-nums text-ink">{formatPrice(order.totalCents)}</span>
       </p>
 
       {addressLine ? (

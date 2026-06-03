@@ -22,10 +22,7 @@ export default function CategoryBrowseCard({ category }: { category: BrowseCateg
   const { title, href, imageSrc, hue } = category;
 
   return (
-    <Link
-      href={href}
-      className="group flex cursor-pointer flex-col gap-3"
-    >
+    <Link href={href} className="group flex cursor-pointer flex-col gap-3">
       <div className="relative aspect-[5/6] w-full sm:aspect-[3/4] md:aspect-square">
         {imageSrc ? (
           <Image

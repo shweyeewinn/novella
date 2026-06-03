@@ -1,0 +1,103 @@
+{
+  "kind": "collectionType",
+  "collectionName": "books",
+  "info": {
+    "singularName": "book",
+    "pluralName": "books",
+    "displayName": "Book",
+    "description": "Catalog title for the Novella shop"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "attributes": {
+    "bookId": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "title",
+      "required": true
+    },
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "author": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "text",
+      "required": true
+    },
+    "priceCents": {
+      "type": "integer",
+      "required": true,
+      "min": 0
+    },
+    "format": {
+      "type": "enumeration",
+      "enum": ["physical", "digital"],
+      "default": "physical",
+      "required": true
+    },
+    "category": {
+      "type": "enumeration",
+      "enum": ["fiction", "nonfiction", "nature", "literary"],
+      "default": "fiction",
+      "required": true
+    },
+    "featured": {
+      "type": "boolean",
+      "default": false
+    },
+    "rating": {
+      "type": "decimal",
+      "default": 0
+    },
+    "reviewCount": {
+      "type": "integer",
+      "default": 0
+    },
+    "inventoryCount": {
+      "type": "integer",
+      "default": 0
+    },
+    "pages": {
+      "type": "integer"
+    },
+    "isbn": {
+      "type": "string"
+    },
+    "publisher": {
+      "type": "string"
+    },
+    "publishedYear": {
+      "type": "integer"
+    },
+    "coverHue": {
+      "type": "integer",
+      "default": 200
+    },
+    "coverImageSrc": {
+      "type": "string",
+      "required": true
+    },
+    "cover": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": ["images"]
+    },
+    "collections": {
+      "type": "json",
+      "default": []
+    },
+    "preOrder": {
+      "type": "boolean",
+      "default": false
+    }
+  }
+}

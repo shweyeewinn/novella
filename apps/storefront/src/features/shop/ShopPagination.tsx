@@ -29,10 +29,7 @@ export default function ShopPagination({ page, totalPages }: ShopPaginationProps
     "inline-flex min-h-10 min-w-10 cursor-pointer items-center justify-center rounded-md border border-border bg-paper px-3 font-sans text-sm text-ink transition-colors hover:border-primary/40 hover:bg-paper-muted disabled:pointer-events-none disabled:opacity-40";
 
   return (
-    <nav
-      className="flex flex-wrap items-center justify-center gap-2"
-      aria-label="Pagination"
-    >
+    <nav className="flex flex-wrap items-center justify-center gap-2" aria-label="Pagination">
       {page > 1 ? (
         <Link href={hrefForPage(page - 1)} className={btnClass} aria-label="Previous page">
           Previous

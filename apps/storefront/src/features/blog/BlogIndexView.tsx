@@ -1,10 +1,5 @@
 import Link from "next/link";
-import {
-  BLOG_SECTION_MAX_POSTS,
-  getAllPosts,
-  getFeaturedPost,
-  categoryLabels,
-} from "@/features/blog/catalog";
+import { BLOG_SECTION_MAX_POSTS, categoryLabels } from "@/features/blog/catalog";
 import type { BlogCategory, BlogPost } from "@/features/blog/types";
 import BlogCard from "@/shared/components/blog/BlogCard";
 import BlogFeaturedCard from "@/shared/components/blog/BlogFeaturedCard";
@@ -21,10 +16,14 @@ function groupPostsByCategory(posts: BlogPost[]): { category: BlogCategory; post
     .filter((group) => group.posts.length > 0);
 }
 
-export default function BlogIndexView() {
-  const featured = getFeaturedPost();
-  const posts = getAllPosts().filter((p) => p.slug !== featured?.slug);
-  const groups = groupPostsByCategory(posts);
+type BlogIndexViewProps = {
+  featured: BlogPost | undefined;
+  posts: BlogPost[];
+};
+
+export default function BlogIndexView({ featured, posts }: BlogIndexViewProps) {
+  const rest = posts.filter((p) => p.slug !== featured?.slug);
+  const groups = groupPostsByCategory(rest);
 
   return (
     <div className="w-full space-y-10 sm:space-y-12">
@@ -35,51 +34,34 @@ export default function BlogIndexView() {
       {groups.length > 1 ? (
         <nav className="flex flex-wrap gap-2" aria-label="Browse by topic">
           {groups.map(({ category }) => (
-            <Link
+            <a
               key={category}
-              href={`#posts-${category}`}
-              className="cursor-pointer rounded-md border border-border bg-paper-muted/80 px-3 py-1.5 font-sans text-sm text-ink-muted transition-colors hover:border-primary/30 hover:text-primary"
+              href={`#blog-${category}`}
+              className="rounded-full border border-border px-3 py-1 font-sans text-sm text-ink-muted transition-colors hover:border-primary/30 hover:text-ink"
             >
               {categoryLabels[category]}
-            </Link>
+            </a>
           ))}
         </nav>
       ) : null}
 
-      <div className="space-y-12 sm:space-y-14">
-        {groups.map(({ category, posts: groupPosts }) => {
-          const visiblePosts = groupPosts.slice(0, BLOG_SECTION_MAX_POSTS);
-          const totalInCategory = groupPosts.length;
-          const countLabel =
-            totalInCategory > BLOG_SECTION_MAX_POSTS
-              ? `Showing ${BLOG_SECTION_MAX_POSTS} of ${totalInCategory} articles`
-              : `${totalInCategory} ${totalInCategory === 1 ? "article" : "articles"}`;
+      {groups.map(({ category, posts: sectionPosts }) => (
+        <section key={category} id={`blog-${category}`} className="space-y-6">
+          <h2 className="font-serif text-2xl text-ink">{categoryLabels[category]}</h2>
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {sectionPosts.slice(0, BLOG_SECTION_MAX_POSTS).map((post) => (
+              <BlogCard key={post.slug} post={post} />
+            ))}
+          </div>
+        </section>
+      ))}
 
-          return (
-            <section
-              key={category}
-              id={`posts-${category}`}
-              className="scroll-mt-24 space-y-6"
-              aria-labelledby={`heading-${category}`}
-            >
-              <div className="flex flex-wrap items-end justify-between gap-3 border-b border-border pb-4">
-                <h2
-                  id={`heading-${category}`}
-                  className="font-serif text-2xl font-bold text-ink sm:text-3xl"
-                >
-                  {categoryLabels[category]}
-                </h2>
-                <p className="font-sans text-sm text-ink-muted">{countLabel}</p>
-              </div>
-              <div className="grid gap-6 sm:grid-cols-2 lg:gap-8">
-                {visiblePosts.map((post) => (
-                  <BlogCard key={post.slug} post={post} />
-                ))}
-              </div>
-            </section>
-          );
-        })}
-      </div>
+      <p className="font-sans text-sm text-ink-muted">
+        <Link href="/shop" className="text-primary hover:underline">
+          Browse the shop
+        </Link>{" "}
+        for new titles and pre-orders.
+      </p>
     </div>
   );
 }

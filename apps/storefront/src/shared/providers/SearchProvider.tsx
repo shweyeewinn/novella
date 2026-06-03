@@ -1,23 +1,13 @@
 "use client";
 
-import {
-  createContext,
-  useContext,
-  Suspense,
-  type ReactNode,
-} from "react";
-import {
-  useShopSearch,
-  type ShopSearchState,
-} from "@/shared/hooks/useShopSearch";
+import { createContext, useContext, Suspense, type ReactNode } from "react";
+import { useShopSearch, type ShopSearchState } from "@/shared/hooks/useShopSearch";
 
 const SearchContext = createContext<ShopSearchState | null>(null);
 
 function SearchProviderInner({ children }: { children: ReactNode }) {
   const search = useShopSearch();
-  return (
-    <SearchContext.Provider value={search}>{children}</SearchContext.Provider>
-  );
+  return <SearchContext.Provider value={search}>{children}</SearchContext.Provider>;
 }
 
 export function SearchProvider({ children }: { children: ReactNode }) {

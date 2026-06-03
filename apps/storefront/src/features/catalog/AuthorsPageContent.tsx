@@ -1,16 +1,23 @@
 import Link from "next/link";
 import {
   AUTHORS_SECTION_VISIBLE_COUNT,
-  getAuthorsPageData,
   getAuthorsSectionMaxHeight,
-  getTitleCount,
+  type AuthorsPageData,
 } from "./getAuthorsPageData";
 
 type AuthorsPageContentProps = {
-  data: ReturnType<typeof getAuthorsPageData>;
+  data: AuthorsPageData;
 };
 
-function AuthorList({ authors, sectionLabel }: { authors: string[]; sectionLabel: string }) {
+function AuthorList({
+  authors,
+  sectionLabel,
+  titleCountByAuthor,
+}: {
+  authors: string[];
+  sectionLabel: string;
+  titleCountByAuthor: Record<string, number>;
+}) {
   if (authors.length === 0) return null;
 
   const scrollable = authors.length > AUTHORS_SECTION_VISIBLE_COUNT;
@@ -34,7 +41,7 @@ function AuthorList({ authors, sectionLabel }: { authors: string[]; sectionLabel
     >
       <ul className="divide-y divide-border">
         {authors.map((author) => {
-          const count = getTitleCount(author);
+          const count = titleCountByAuthor[author] ?? 0;
           return (
             <li key={author}>
               <Link
@@ -59,9 +66,11 @@ function AuthorList({ authors, sectionLabel }: { authors: string[]; sectionLabel
 function AuthorScriptSection({
   title,
   authors,
+  titleCountByAuthor,
 }: {
   title: string;
   authors: string[];
+  titleCountByAuthor: Record<string, number>;
 }) {
   if (authors.length === 0) return null;
 
@@ -81,13 +90,13 @@ function AuthorScriptSection({
           </p>
         )}
       </div>
-      <AuthorList authors={authors} sectionLabel={title} />
+      <AuthorList authors={authors} sectionLabel={title} titleCountByAuthor={titleCountByAuthor} />
     </section>
   );
 }
 
 export default function AuthorsPageContent({ data }: AuthorsPageContentProps) {
-  const { myanmarAuthors, englishAuthors, totalAuthors } = data;
+  const { myanmarAuthors, englishAuthors, totalAuthors, titleCountByAuthor } = data;
 
   return (
     <div className="w-full space-y-8">
@@ -103,10 +112,12 @@ export default function AuthorsPageContent({ data }: AuthorsPageContentProps) {
         <AuthorScriptSection
           title="မြန်မာ အက္ခရာ (က မှ အ)"
           authors={myanmarAuthors}
+          titleCountByAuthor={titleCountByAuthor}
         />
         <AuthorScriptSection
           title="အင်္ဂလိပ် အက္ခရာ (A မှ Z)"
           authors={englishAuthors}
+          titleCountByAuthor={titleCountByAuthor}
         />
       </div>
     </div>

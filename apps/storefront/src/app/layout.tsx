@@ -48,10 +48,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html
-      lang="en"
-      className={`${ebGaramond.variable} ${lora.variable} h-full antialiased`}
-    >
+    <html lang="en" className={`${ebGaramond.variable} ${lora.variable} h-full antialiased`}>
       <body className="flex min-h-full flex-col overflow-x-clip bg-paper text-ink">
         <SearchProvider>
           <SiteHeader />

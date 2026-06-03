@@ -11,9 +11,11 @@ export const orderStatusLabels: Record<OrderStatus, string> = {
 };
 
 export const orderStatusHints: Record<OrderStatus, string> = {
-  pending_payment: "Transfer the total and send proof on Messenger.",
-  payment_review: "We received your proof and are verifying payment.",
-  paid: "Thank you — we are getting your books ready.",
+  pending_payment:
+    "Transfer the total and upload your proof. Payment is confirmed only after we verify the transfer in our bank account.",
+  payment_review:
+    "We received your proof. Our team will confirm payment after checking the transfer in our bank account.",
+  paid: "Payment confirmed — we are getting your books ready.",
   processing: "Your order is being packed.",
   shipped: "Your parcel is on the way.",
   delivered: "Your order has been delivered.",

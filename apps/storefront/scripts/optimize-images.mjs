@@ -93,7 +93,9 @@ async function main() {
       const { before, after } = await optimizeFile(file, job.maxWidth, job.quality);
       totalBefore += before;
       totalAfter += after;
-      console.log(`✓ ${path.relative(PUBLIC, file)} → WebP (${Math.round(before / 1024)}KB → ${Math.round(after / 1024)}KB)`);
+      console.log(
+        `✓ ${path.relative(PUBLIC, file)} → WebP (${Math.round(before / 1024)}KB → ${Math.round(after / 1024)}KB)`
+      );
     }
   }
 

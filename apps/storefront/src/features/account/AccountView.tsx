@@ -70,7 +70,7 @@ export default function AccountView({
           <h1 className="font-serif text-3xl text-ink sm:text-4xl">My account</h1>
           <p className="font-sans text-ink-muted">{user.email}</p>
         </div>
-        <Button type="button" variant="secondary" onClick={handleLogout}>
+        <Button type="button" onClick={handleLogout}>
           Log out
         </Button>
       </header>
@@ -107,11 +107,7 @@ export default function AccountView({
           </p>
         </div>
         <form onSubmit={handleShippingSave} className="space-y-4">
-          <ShippingAddressForm
-            value={shipping}
-            onChange={setShipping}
-            idPrefix="account-ship"
-          />
+          <ShippingAddressForm value={shipping} onChange={setShipping} idPrefix="account-ship" />
           <div className="flex flex-wrap items-center gap-3">
             <Button type="submit" disabled={!isShippingComplete(shipping)}>
               Save address

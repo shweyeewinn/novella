@@ -36,13 +36,13 @@ How we structure code, how strict each layer should be, and what “done” mean
 
 Use when planning or reviewing work. New code should target **L2** minimum; checkout/auth/reviews target **L3**.
 
-| Level | Name | Meaning |
-|-------|------|---------|
-| **L0** | Prototype | UI works with mocks; rules optional |
-| **L1** | Interactive | Works in browser; client or static data (cart, static catalog) |
-| **L2** | App-standard | `lib/` repos, shared UI, typed APIs |
-| **L3** | Production | Auth gates, purchase checks, env secrets, clean `typecheck` + `build` |
-| **L4** | Operated | Strapi, transactional email, Stripe/bank ops in CMS, monitoring |
+| Level  | Name         | Meaning                                                               |
+| ------ | ------------ | --------------------------------------------------------------------- |
+| **L0** | Prototype    | UI works with mocks; rules optional                                   |
+| **L1** | Interactive  | Works in browser; client or static data (cart, static catalog)        |
+| **L2** | App-standard | `lib/` repos, shared UI, typed APIs                                   |
+| **L3** | Production   | Auth gates, purchase checks, env secrets, clean `typecheck` + `build` |
+| **L4** | Operated     | Strapi, transactional email, Stripe/bank ops in CMS, monitoring       |
 
 **Promotion checklist**
 

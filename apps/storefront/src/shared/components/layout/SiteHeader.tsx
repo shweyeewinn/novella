@@ -24,9 +24,7 @@ export default function SiteHeader() {
             </div>
           </div>
           <Suspense
-            fallback={
-              <div className="h-11 w-full rounded-md bg-paper-muted" aria-hidden />
-            }
+            fallback={<div className="h-11 w-full rounded-md bg-paper-muted" aria-hidden />}
           >
             <SiteSearch compact mobile />
           </Suspense>
@@ -38,10 +36,7 @@ export default function SiteHeader() {
 
           <div className="min-w-8 flex-1" aria-hidden />
 
-          <nav
-            className="flex shrink-0 items-center gap-x-5 xl:gap-x-6"
-            aria-label="Main"
-          >
+          <nav className="flex shrink-0 items-center gap-x-5 xl:gap-x-6" aria-label="Main">
             {mainNav.map((item) => (
               <MainNavLink
                 key={item.href}
@@ -54,9 +49,7 @@ export default function SiteHeader() {
 
           <div className="w-56 shrink-0 xl:w-64">
             <Suspense
-              fallback={
-                <div className="h-10 w-full rounded-md bg-paper-muted" aria-hidden />
-              }
+              fallback={<div className="h-10 w-full rounded-md bg-paper-muted" aria-hidden />}
             >
               <SiteSearch compact />
             </Suspense>

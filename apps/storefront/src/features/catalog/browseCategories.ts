@@ -24,9 +24,21 @@ export const browseCategories: BrowseCategory[] = [
     imageSrc: "/categories/cat1.webp",
     hue: 38,
     children: [
-      { id: "educational-study", title: "Textbooks & study", href: "/shop?collection=educational-study" },
-      { id: "educational-early", title: "Early learning", href: "/shop?collection=educational-early" },
-      { id: "educational-professional", title: "Professional & skills", href: "/shop?collection=educational-professional" },
+      {
+        id: "educational-study",
+        title: "Textbooks & study",
+        href: "/shop?collection=educational-study",
+      },
+      {
+        id: "educational-early",
+        title: "Early learning",
+        href: "/shop?collection=educational-early",
+      },
+      {
+        id: "educational-professional",
+        title: "Professional & skills",
+        href: "/shop?collection=educational-professional",
+      },
     ],
   },
   {
@@ -37,9 +49,17 @@ export const browseCategories: BrowseCategory[] = [
     hue: 220,
     children: [
       { id: "fiction-romance", title: "Romance", href: "/shop?collection=fiction-romance" },
-      { id: "fiction-mystery", title: "Mystery & thriller", href: "/shop?collection=fiction-mystery" },
+      {
+        id: "fiction-mystery",
+        title: "Mystery & thriller",
+        href: "/shop?collection=fiction-mystery",
+      },
       { id: "fiction-scifi", title: "Sci-fi & fantasy", href: "/shop?collection=fiction-scifi" },
-      { id: "fiction-literary", title: "Literary fiction", href: "/shop?collection=fiction-literary" },
+      {
+        id: "fiction-literary",
+        title: "Literary fiction",
+        href: "/shop?collection=fiction-literary",
+      },
     ],
   },
   {
@@ -50,8 +70,16 @@ export const browseCategories: BrowseCategory[] = [
     hue: 28,
     children: [
       { id: "biography-memoir", title: "Memoir", href: "/shop?collection=biography-memoir" },
-      { id: "biography-historical", title: "Historical figures", href: "/shop?collection=biography-historical" },
-      { id: "biography-contemporary", title: "Contemporary lives", href: "/shop?collection=biography-contemporary" },
+      {
+        id: "biography-historical",
+        title: "Historical figures",
+        href: "/shop?collection=biography-historical",
+      },
+      {
+        id: "biography-contemporary",
+        title: "Contemporary lives",
+        href: "/shop?collection=biography-contemporary",
+      },
     ],
   },
   {
@@ -73,9 +101,21 @@ export const browseCategories: BrowseCategory[] = [
     imageSrc: "/categories/cat5.webp",
     hue: 195,
     children: [
-      { id: "mental-health-self-help", title: "Self-help", href: "/shop?collection=mental-health-self-help" },
-      { id: "mental-health-psychology", title: "Psychology", href: "/shop?collection=mental-health-psychology" },
-      { id: "mental-health-wellness", title: "Wellness & mindfulness", href: "/shop?collection=mental-health-wellness" },
+      {
+        id: "mental-health-self-help",
+        title: "Self-help",
+        href: "/shop?collection=mental-health-self-help",
+      },
+      {
+        id: "mental-health-psychology",
+        title: "Psychology",
+        href: "/shop?collection=mental-health-psychology",
+      },
+      {
+        id: "mental-health-wellness",
+        title: "Wellness & mindfulness",
+        href: "/shop?collection=mental-health-wellness",
+      },
     ],
   },
   {
@@ -87,7 +127,11 @@ export const browseCategories: BrowseCategory[] = [
     children: [
       { id: "history-world", title: "World history", href: "/shop?collection=history-world" },
       { id: "history-myanmar", title: "Myanmar history", href: "/shop?collection=history-myanmar" },
-      { id: "history-politics-current", title: "Politics & current affairs", href: "/shop?collection=history-politics-current" },
+      {
+        id: "history-politics-current",
+        title: "Politics & current affairs",
+        href: "/shop?collection=history-politics-current",
+      },
     ],
   },
   {
@@ -97,9 +141,17 @@ export const browseCategories: BrowseCategory[] = [
     imageSrc: "/categories/cat7.webp",
     hue: 350,
     children: [
-      { id: "religion-buddhism", title: "Buddhism & dharma", href: "/shop?collection=religion-buddhism" },
+      {
+        id: "religion-buddhism",
+        title: "Buddhism & dharma",
+        href: "/shop?collection=religion-buddhism",
+      },
       { id: "religion-faith", title: "Faith & practice", href: "/shop?collection=religion-faith" },
-      { id: "religion-philosophy", title: "Philosophy", href: "/shop?collection=religion-philosophy" },
+      {
+        id: "religion-philosophy",
+        title: "Philosophy",
+        href: "/shop?collection=religion-philosophy",
+      },
     ],
   },
   {

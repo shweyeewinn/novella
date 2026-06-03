@@ -8,7 +8,11 @@ export default function Breadcrumbs({ items }: { items: Crumb[] }) {
       <ol className="flex flex-wrap items-center gap-2">
         {items.map((item, i) => (
           <li key={`${item.label}-${i}`} className="flex items-center gap-2">
-            {i > 0 ? <span className="text-gold" aria-hidden>/</span> : null}
+            {i > 0 ? (
+              <span className="text-gold" aria-hidden>
+                /
+              </span>
+            ) : null}
             {item.href ? (
               <Link
                 href={item.href}
@@ -17,9 +21,7 @@ export default function Breadcrumbs({ items }: { items: Crumb[] }) {
                 {item.label}
               </Link>
             ) : (
-              <span className="max-w-[12rem] truncate text-ink sm:max-w-none">
-                {item.label}
-              </span>
+              <span className="max-w-[12rem] truncate text-ink sm:max-w-none">{item.label}</span>
             )}
           </li>
         ))}

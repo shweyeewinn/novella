@@ -42,8 +42,8 @@ export default function ShopPageContent({ data }: ShopPageContentProps) {
               {totalResults !== inventoryCount ? (
                 <>
                   {" "}
-                  · <span className="font-medium text-ink">{totalResults}</span> matching
-                  your filters
+                  · <span className="font-medium text-ink">{totalResults}</span> matching your
+                  filters
                 </>
               ) : null}
             </>

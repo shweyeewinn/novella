@@ -17,16 +17,14 @@ export function normalizeShippingAddress(
   };
 }
 
-export function isShippingComplete(
-  address: Partial<ShippingAddress> | null | undefined
-): boolean {
+export function isShippingComplete(address: Partial<ShippingAddress> | null | undefined): boolean {
   const s = normalizeShippingAddress(address);
   return Boolean(
     s.fullName.trim() &&
-      s.phone.trim() &&
-      s.line1.trim() &&
-      s.city.trim() &&
-      s.region.trim() &&
-      s.country.trim()
+    s.phone.trim() &&
+    s.line1.trim() &&
+    s.city.trim() &&
+    s.region.trim() &&
+    s.country.trim()
   );
 }

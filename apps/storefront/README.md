@@ -25,15 +25,15 @@ npm run dev
 
 ## Scripts
 
-| Script | Description |
-|--------|-------------|
-| `npm run dev` | Development server |
-| `npm run build` | Production build |
-| `npm run start` | Serve production build |
-| `npm run lint` | ESLint |
-| `npm run typecheck` | TypeScript check |
+| Script                    | Description                                                |
+| ------------------------- | ---------------------------------------------------------- |
+| `npm run dev`             | Development server                                         |
+| `npm run build`           | Production build                                           |
+| `npm run start`           | Serve production build                                     |
+| `npm run lint`            | ESLint                                                     |
+| `npm run typecheck`       | TypeScript check                                           |
 | `npm run optimize:images` | Compress `public/covers`, `public/categories`, logo → WebP |
-| `npm run perf:lighthouse` | Run Lighthouse (requires dev server) |
+| `npm run perf:lighthouse` | Run Lighthouse (requires dev server)                       |
 
 ## Docs
 
@@ -42,16 +42,16 @@ npm run dev
 
 ## Key directories
 
-| Path | Purpose |
-|------|---------|
-| `src/app/` | Routes (home, shop, search, PDP, cart, checkout, blog, …) |
-| `src/features/books/` | Catalog: `preOrderBooks`, `newReleaseBooks`, `catalog.ts` |
-| `src/features/home/` | Home sections, carousels, browse categories |
-| `src/features/shop/` | Server shop: `getShopPageData`, filters, pagination |
-| `src/shared/components/` | Header, logo, book cards, search, UI primitives |
-| `public/covers/` | Jacket WebP assets (`pre-order/`, `new-releases/`) |
-| `public/categories/` | Browse-by-category tile images |
-| `scripts/optimize-images.mjs` | Sharp-based asset pipeline |
+| Path                          | Purpose                                                   |
+| ----------------------------- | --------------------------------------------------------- |
+| `src/app/`                    | Routes (home, shop, search, PDP, cart, checkout, blog, …) |
+| `src/features/books/`         | Catalog: `preOrderBooks`, `newReleaseBooks`, `catalog.ts` |
+| `src/features/home/`          | Home sections, carousels, browse categories               |
+| `src/features/shop/`          | Server shop: `getShopPageData`, filters, pagination       |
+| `src/shared/components/`      | Header, logo, book cards, search, UI primitives           |
+| `public/covers/`              | Jacket WebP assets (`pre-order/`, `new-releases/`)        |
+| `public/categories/`          | Browse-by-category tile images                            |
+| `scripts/optimize-images.mjs` | Sharp-based asset pipeline                                |
 
 ## Catalog (current)
 

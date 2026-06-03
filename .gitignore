@@ -11,7 +11,7 @@ build
 coverage
 .turbo
 
-# Local JSON stores (users, orders, reviews)
+# Local JSON stores (users, orders, reviews, payment proofs)
 .data
 **/.data/
 

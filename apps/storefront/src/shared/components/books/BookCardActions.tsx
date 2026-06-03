@@ -84,11 +84,7 @@ export default function BookCardActions({ book, variant = "default" }: BookCardA
         )}
       </div>
       {cartMessage ? (
-        <p
-          className="font-sans text-xs leading-snug text-primary"
-          role="status"
-          aria-live="polite"
-        >
+        <p className="font-sans text-xs leading-snug text-primary" role="status" aria-live="polite">
           The book is added to your cart.
         </p>
       ) : null}

@@ -37,8 +37,8 @@ export default function AddToCartPanel({ book }: { book: Book }) {
       </p>
       {book.preOrder ? (
         <p className="font-sans text-sm text-ink-muted">
-          <span className="font-medium text-primary">Pre-order</span> — ships when stock
-          arrives. You will not be charged until fulfillment is confirmed at checkout.
+          <span className="font-medium text-primary">Pre-order</span> — ships when stock arrives.
+          You will not be charged until fulfillment is confirmed at checkout.
         </p>
       ) : book.format === "physical" && book.inventoryCount !== undefined ? (
         <p className="font-sans text-sm text-ink-muted">
@@ -83,11 +83,7 @@ export default function AddToCartPanel({ book }: { book: Book }) {
       </div>
 
       {justAdded ? (
-        <p
-          className="font-sans text-sm text-primary"
-          role="status"
-          aria-live="polite"
-        >
+        <p className="font-sans text-sm text-primary" role="status" aria-live="polite">
           Added to cart — see the count in the header.
         </p>
       ) : null}
@@ -96,12 +92,7 @@ export default function AddToCartPanel({ book }: { book: Book }) {
         <Button disabled={!inStock} onClick={handleAdd} className="flex-1">
           {book.preOrder ? "Pre-order" : "Add to cart"}
         </Button>
-        <Button
-          variant="secondary"
-          disabled={!inStock}
-          onClick={handleBuyNow}
-          className="flex-1"
-        >
+        <Button variant="secondary" disabled={!inStock} onClick={handleBuyNow} className="flex-1">
           Buy now
         </Button>
       </div>

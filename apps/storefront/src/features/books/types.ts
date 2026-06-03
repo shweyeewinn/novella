@@ -1,10 +1,6 @@
 export type BookFormat = "physical" | "digital";
 
-export type BookCategory =
-  | "fiction"
-  | "nonfiction"
-  | "nature"
-  | "literary";
+export type BookCategory = "fiction" | "nonfiction" | "nature" | "literary";
 
 export type Book = {
   id: string;

@@ -96,8 +96,7 @@ export default function CheckoutView() {
 
       clearCart();
       router.push(
-        data.checkoutUrl ??
-          `/checkout/success?order=${encodeURIComponent(data.orderId ?? "")}`
+        data.checkoutUrl ?? `/checkout/success?order=${encodeURIComponent(data.orderId ?? "")}`
       );
       router.refresh();
     } catch {
@@ -107,9 +106,7 @@ export default function CheckoutView() {
     }
   }
 
-  const canSubmit =
-    (user?.email ?? email.trim()) &&
-    (!hasPhysical || isShippingComplete(shipping));
+  const canSubmit = (user?.email ?? email.trim()) && (!hasPhysical || isShippingComplete(shipping));
 
   return (
     <div className="mx-auto w-full min-w-0 max-w-2xl space-y-8">
@@ -169,11 +166,7 @@ export default function CheckoutView() {
       {hasPhysical ? (
         <section className="space-y-4 rounded-lg border border-border bg-paper-muted/40 p-5 sm:p-6">
           <h2 className="font-serif text-xl font-bold text-ink">Delivery address</h2>
-          <ShippingAddressForm
-            value={shipping}
-            onChange={setShipping}
-            idPrefix="checkout-ship"
-          />
+          <ShippingAddressForm value={shipping} onChange={setShipping} idPrefix="checkout-ship" />
         </section>
       ) : null}
 
@@ -197,9 +190,7 @@ export default function CheckoutView() {
       <div className="rounded-lg border border-border bg-paper-muted/60 p-6">
         <div className="flex justify-between font-sans text-sm">
           <span className="text-ink-muted">Total to transfer</span>
-          <span className="font-semibold tabular-nums text-ink">
-            {formatPrice(subtotalCents)}
-          </span>
+          <span className="font-semibold tabular-nums text-ink">{formatPrice(subtotalCents)}</span>
         </div>
         {error ? (
           <p className="mt-3 font-sans text-sm text-ink" role="alert">
