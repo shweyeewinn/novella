@@ -11,6 +11,7 @@ import BookCard from "@/shared/components/books/BookCard";
 import BookCover from "@/shared/components/books/BookCover";
 import StarRating from "@/shared/components/books/StarRating";
 import Breadcrumbs from "@/shared/components/ui/Breadcrumbs";
+import { bookGridClass } from "@/shared/constants/layout";
 
 type PageProps = { params: Promise<{ slug: string }> };
 
@@ -51,8 +52,8 @@ export default async function BookDetailPage({ params }: PageProps) {
         <BookCover book={book} size="lg" className="mx-auto lg:mx-0" />
         <div className="space-y-6">
           <header className="space-y-2">
-            <h1 className="font-serif text-3xl text-ink sm:text-4xl">{book.title}</h1>
-            <p className="font-sans text-lg text-sage">by {book.author}</p>
+            <h1 className="break-words font-serif text-3xl text-ink sm:text-4xl">{book.title}</h1>
+            <p className="font-sans text-lg text-ink-muted">by {book.author}</p>
             <StarRating rating={book.rating} reviewCount={book.reviewCount} />
           </header>
           <AddToCartPanel book={book} />
@@ -101,9 +102,9 @@ export default async function BookDetailPage({ params }: PageProps) {
       {related.length > 0 ? (
         <section className="space-y-6 border-t border-border pt-10">
           <h2 className="font-serif text-2xl text-ink">You may also like</h2>
-          <div className="grid grid-cols-2 gap-6 md:grid-cols-4">
+          <div className={bookGridClass}>
             {related.map((b) => (
-              <BookCard key={b.id} book={b} />
+              <BookCard key={b.id} book={b} className="h-full" />
             ))}
           </div>
         </section>
