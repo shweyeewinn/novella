@@ -16,6 +16,8 @@ jobs:
           node-version: "20"
           cache: npm
           cache-dependency-path: package-lock.json
-      - run: npm ci
+      - run: npm ci --include=optional
+      - name: Install lightningcss Linux binding for Tailwind
+        run: npm install --no-save -w storefront lightningcss-linux-x64-gnu@1.32.0
       - run: npm run check
       - run: npm run build
