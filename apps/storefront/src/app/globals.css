@@ -1,30 +1,21 @@
 @import "tailwindcss";
 
-@variant dark (&:where(.dark, .dark *));
-
-/* Modern Library — light */
+/*
+ * Cozy Book palette — 60-30-10
+ * ~60% parchment white (--paper)
+ * ~30% espresso text + oatmeal surfaces (--ink, --paper-muted)
+ * ≤10% terracotta + gold accents (--primary, --gold)
+ */
 :root {
-  --paper: #fbf9f6;
-  --paper-muted: #f4f1ea;
-  --ink: #1c2321;
-  --ink-muted: #2e3033;
-  --accent: #1d2d44;
-  --accent-hover: #152536;
+  --paper: #f9f6f0;
+  --paper-muted: #e6dfd3;
+  --ink: #3d2c1f;
+  --ink-muted: #6e5c4e;
+  --border: #d9d0c4;
+  --primary: #c87a53;
+  --primary-hover: #a86640;
+  --on-primary: #ffffff;
   --gold: #d4af37;
-  --sage: #a9b79e;
-  --border: #e8e4dc;
-}
-
-.dark {
-  --paper: #0f172a;
-  --paper-muted: #1e293b;
-  --ink: #e2e8f0;
-  --ink-muted: #94a3b8;
-  --accent: #7b9ec4;
-  --accent-hover: #9bb8d9;
-  --gold: #c9a227;
-  --sage: #8fa38a;
-  --border: #334155;
 }
 
 @theme inline {
@@ -32,21 +23,56 @@
   --color-paper-muted: var(--paper-muted);
   --color-ink: var(--ink);
   --color-ink-muted: var(--ink-muted);
-  --color-accent: var(--accent);
-  --color-accent-hover: var(--accent-hover);
-  --color-gold: var(--gold);
-  --color-sage: var(--sage);
   --color-border: var(--border);
-  --font-serif: var(--font-lora);
-  --font-sans: var(--font-inter);
+  --color-primary: var(--primary);
+  --color-primary-hover: var(--primary-hover);
+  --color-on-primary: var(--on-primary);
+  --color-gold: var(--gold);
+  --font-serif: var(--font-garamond);
+  --font-sans: var(--font-lora);
+}
+
+html {
+  overflow-x: clip;
 }
 
 body {
   background: var(--paper);
   color: var(--ink);
-  font-family: var(--font-inter), Inter, ui-sans-serif, system-ui, sans-serif;
+  font-family: var(--font-lora), Lora, Georgia, "Times New Roman", serif;
+  overflow-x: clip;
 }
 
 * {
   box-sizing: border-box;
+}
+
+a,
+button:not(:disabled),
+[role="button"]:not([aria-disabled="true"]),
+label:has(input[type="checkbox"]),
+label:has(input[type="radio"]),
+select,
+summary {
+  cursor: pointer;
+}
+
+button:disabled,
+[aria-disabled="true"] {
+  cursor: not-allowed;
+}
+
+.blog-prose p:first-of-type::first-letter {
+  font-family: var(--font-garamond), "EB Garamond", Georgia, serif;
+  font-size: 2.25rem;
+  line-height: 1;
+  float: left;
+  margin: 0.08em 0.12em 0 0;
+  color: var(--primary);
+}
+
+@media (min-width: 640px) {
+  .blog-prose p:first-of-type::first-letter {
+    font-size: 3.25rem;
+  }
 }

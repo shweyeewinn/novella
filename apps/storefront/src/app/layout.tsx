@@ -1,21 +1,26 @@
 import type { Metadata } from "next";
-import { Inter, Lora } from "next/font/google";
+import { EB_Garamond, Lora } from "next/font/google";
 import "./globals.css";
 import SiteFooter from "@/shared/components/layout/SiteFooter";
 import SiteHeader from "@/shared/components/layout/SiteHeader";
-import ThemeProvider from "@/shared/providers/ThemeProvider";
+import ScrollToTop from "@/shared/components/layout/ScrollToTop";
+import { SearchProvider } from "@/shared/providers/SearchProvider";
 import { site } from "@/config/site";
 
-const inter = Inter({
-  variable: "--font-inter",
+/** Headings — classic literary serif */
+const ebGaramond = EB_Garamond({
+  variable: "--font-garamond",
   subsets: ["latin"],
   display: "swap",
+  weight: ["400", "600"],
 });
 
+/** Body — readable contemporary serif */
 const lora = Lora({
   variable: "--font-lora",
   subsets: ["latin"],
   display: "swap",
+  weight: ["400", "600"],
 });
 
 export const metadata: Metadata = {
@@ -25,6 +30,16 @@ export const metadata: Metadata = {
   },
   description: site.tagline,
   authors: [{ name: site.owner.name, url: `mailto:${site.owner.email}` }],
+  icons: {
+    icon: [
+      { url: "/favicon-16.png", sizes: "16x16", type: "image/png" },
+      { url: "/favicon-32.png", sizes: "32x32", type: "image/png" },
+      { url: "/favicon-48.png", sizes: "48x48", type: "image/png" },
+      { url: "/favicon-192.png", sizes: "192x192", type: "image/png" },
+    ],
+    shortcut: "/favicon-32.png",
+    apple: [{ url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" }],
+  },
 };
 
 export default function RootLayout({
@@ -35,28 +50,17 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${lora.variable} h-full antialiased`}
-      suppressHydrationWarning
+      className={`${ebGaramond.variable} ${lora.variable} h-full antialiased`}
     >
-      <head>
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-          try {
-            var t = localStorage.getItem('novella-theme');
-            var dark = t === 'dark' || ((!t || t === 'system') && window.matchMedia('(prefers-color-scheme: dark)').matches);
-            if (dark) document.documentElement.classList.add('dark');
-          } catch (e) {}
-        `,
-          }}
-        />
-      </head>
-      <body className="flex min-h-full flex-col bg-paper text-ink">
-        <ThemeProvider>
+      <body className="flex min-h-full flex-col overflow-x-clip bg-paper text-ink">
+        <SearchProvider>
           <SiteHeader />
-          <main className="mx-auto w-full max-w-6xl flex-1 px-4 py-10 sm:px-6">{children}</main>
+          <main className="mx-auto w-full min-w-0 max-w-6xl flex-1 px-4 pt-6 pb-20 sm:px-6 sm:pt-10 sm:pb-28 lg:pb-32">
+            {children}
+          </main>
           <SiteFooter />
-        </ThemeProvider>
+          <ScrollToTop />
+        </SearchProvider>
       </body>
     </html>
   );
