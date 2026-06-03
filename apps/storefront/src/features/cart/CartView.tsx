@@ -34,28 +34,31 @@ export default function CartView() {
     <div className="space-y-8">
       <h1 className="font-serif text-3xl text-ink sm:text-4xl">Your cart</h1>
       {hasUnknownItems ? (
-        <p className="rounded-md border border-gold/40 bg-paper-muted px-4 py-2 font-sans text-sm text-ink-muted">
+        <p className="rounded-md border border-border bg-paper-muted px-4 py-2 font-sans text-sm text-ink-muted">
           Some items were removed because they are no longer available.
         </p>
       ) : null}
 
-      <div className="grid gap-10 lg:grid-cols-[1fr_320px]">
-        <ul className="divide-y divide-border">
+      <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_min(320px,100%)] lg:gap-10">
+        <ul className="min-w-0 divide-y divide-border">
           {lines.map(({ book, quantity, lineTotalCents }) => (
-            <li key={book.id} className="flex gap-4 py-6 first:pt-0">
-              <Link href={`/books/${book.slug}`} className="shrink-0">
+            <li
+              key={book.id}
+              className="flex flex-col gap-4 py-6 first:pt-0 min-[400px]:flex-row"
+            >
+              <Link href={`/books/${book.slug}`} className="shrink-0 self-start">
                 <BookCover book={book} size="sm" />
               </Link>
               <div className="flex min-w-0 flex-1 flex-col gap-2">
-                <div className="flex flex-wrap items-start justify-between gap-2">
-                  <div>
+                <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
+                  <div className="min-w-0">
                     <Link
                       href={`/books/${book.slug}`}
-                      className="font-serif text-lg text-ink hover:text-accent"
+                      className="cursor-pointer font-serif text-lg text-ink hover:text-primary"
                     >
                       {book.title}
                     </Link>
-                    <p className="font-sans text-sm text-sage">{book.author}</p>
+                    <p className="font-sans text-sm text-ink-muted">{book.author}</p>
                     <div className="mt-1 flex items-center gap-2">
                       <FormatBadge format={book.format} />
                       <span className="font-sans text-sm text-ink-muted">
@@ -72,7 +75,7 @@ export default function CartView() {
                     <button
                       type="button"
                       aria-label="Decrease quantity"
-                      className="px-3 py-1.5 text-ink-muted hover:text-accent"
+                      className="cursor-pointer px-3 py-1.5 text-ink-muted hover:text-ink"
                       onClick={() => setQuantity(book.id, quantity - 1)}
                     >
                       −
@@ -83,7 +86,7 @@ export default function CartView() {
                     <button
                       type="button"
                       aria-label="Increase quantity"
-                      className="px-3 py-1.5 text-ink-muted hover:text-accent"
+                      className="cursor-pointer px-3 py-1.5 text-ink-muted hover:text-ink"
                       onClick={() => setQuantity(book.id, quantity + 1)}
                     >
                       +
@@ -91,7 +94,7 @@ export default function CartView() {
                   </div>
                   <button
                     type="button"
-                    className="font-sans text-sm text-ink-muted hover:text-accent"
+                    className="cursor-pointer font-sans text-sm text-ink-muted hover:text-ink"
                     onClick={() => removeItem(book.id)}
                   >
                     Remove
@@ -133,7 +136,7 @@ export default function CartView() {
           </ButtonLink>
           <Link
             href="/shop"
-            className="mt-4 block text-center font-sans text-sm text-accent hover:underline"
+            className="mt-4 block cursor-pointer text-center font-sans text-sm text-ink hover:underline"
           >
             Continue shopping
           </Link>

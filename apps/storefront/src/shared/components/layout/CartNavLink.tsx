@@ -1,26 +1,45 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useSyncExternalStore } from "react";
 import { useCartStore } from "@/features/cart/store";
+import CartIcon from "@/shared/components/icons/CartIcon";
+import {
+  headerIconBadgeClass,
+  headerIconButtonClass,
+} from "@/shared/components/layout/headerIconStyles";
+
+function subscribeNoop() {
+  return () => {};
+}
+
+function selectCartItemCount(state: { items: { quantity: number }[] }): number {
+  return state.items.reduce((sum, i) => sum + i.quantity, 0);
+}
 
 export default function CartNavLink() {
-  const [mounted, setMounted] = useState(false);
-  const totalItems = useCartStore((s) => s.totalItems());
+  const mounted = useSyncExternalStore(subscribeNoop, () => true, () => false);
+  const itemCount = useCartStore(selectCartItemCount);
 
-  useEffect(() => setMounted(true), []);
+  const ariaLabel =
+    itemCount > 0
+      ? `Cart, ${itemCount} ${itemCount === 1 ? "item" : "items"}`
+      : "Cart";
 
   return (
     <Link
       href="/cart"
-      className="relative transition-colors hover:text-accent"
+      className={`${headerIconButtonClass} text-ink hover:text-primary`}
+      aria-label={ariaLabel}
     >
-      Cart
-      {mounted && totalItems > 0 ? (
-        <span className="absolute -right-3 -top-2 flex h-5 min-w-5 items-center justify-center rounded-full bg-accent px-1 font-sans text-[10px] font-semibold text-paper">
-          {totalItems > 9 ? "9+" : totalItems}
-        </span>
-      ) : null}
+      <span className="relative inline-flex shrink-0">
+        <CartIcon className="h-6 w-6" />
+        {mounted && itemCount > 0 ? (
+          <span className={headerIconBadgeClass} aria-hidden>
+            {itemCount > 99 ? "99+" : itemCount}
+          </span>
+        ) : null}
+      </span>
     </Link>
   );
 }
