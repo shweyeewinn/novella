@@ -1,8 +1,8 @@
 # Novella
 
-**An online bookstore for physical books** — calm, reader-first commerce UI with a planned Strapi CMS and Stripe checkout.
+**An online bookstore for physical books** — calm, reader-first commerce UI with a **Strapi 5 CMS** for catalog content and **bank-transfer checkout** (Stripe integration planned).
 
-**Owner:** Shwe Yee Winn · [yonngelay@gmail.com](mailto:yonngelay@gmail.com)
+**Author:** Shwe Yee Winn · [yonngelay@gmail.com](mailto:yonngelay@gmail.com)
 
 ## Structure
 
@@ -36,7 +36,7 @@ Storefront details: [`apps/storefront/README.md`](./apps/storefront/README.md) �
 ### Catalog & shop
 
 - **13 in-stock titles** with jacket images only (demo placeholders without covers removed)
-- Data: `preOrderBooks.ts`, `newReleaseBooks.ts` — paths under `public/covers/`
+- Catalog: **Strapi REST** when `STRAPI_API_URL` is set; static modules (`preOrderBooks.ts`, `newReleaseBooks.ts`) as fallback
 - **`/shop`** — server-rendered listing, **20 books per page**, URL pagination (`?page=2`)
 - Top **filter bar** (no sidebar): Category, sort (physical books only — no format filter)
 - **Inventory count** in header; filters via `?categories=` (legacy `?category=` still works)
@@ -63,9 +63,11 @@ Storefront details: [`apps/storefront/README.md`](./apps/storefront/README.md) �
 | `/authors` | Author list → shop search |
 | `/blog`, `/blog/[slug]` | Editorial (mock posts) |
 | `/about`, `/contact` | Static pages |
-| `/login`, `/signup`, `/account` | Placeholders |
+| `/login`, `/signup`, `/account` | Auth + order history |
 | `/checkout` | Review → `POST /api/checkout` (IDs + qty only) |
-| `/checkout/success`, `/checkout/cancel` | Checkout outcomes (demo until Stripe) |
+| `/checkout/success` | Order received — upload bank payment proof on-site |
+| `/checkout/cancel` | Checkout cancelled |
+| `/admin/orders` | Admin order queue (payment review → fulfillment) |
 
 ## Architecture
 
@@ -129,12 +131,33 @@ From the repo root:
 
 ```bash
 npm install
-npm run dev
+npm run dev          # storefront → http://localhost:3000
 ```
 
-Open [http://localhost:3000](http://localhost:3000).
+### Strapi CMS (optional, recommended)
 
-From `apps/storefront` only:
+Strapi is **not** in the npm workspace — install and run it separately:
+
+```bash
+cd apps/strapi
+cp .env.example .env   # first time
+npm install
+npm run develop        # API http://localhost:1337/api · admin http://localhost:1337/admin
+```
+
+From the repo root you can also use `npm run dev:cms`. On first boot, seed data loads from `database/seed/`. See [`apps/strapi/README.md`](./apps/strapi/README.md).
+
+Storefront env (`apps/storefront/.env.local`):
+
+```env
+NEXT_PUBLIC_STRAPI_URL=http://localhost:1337
+STRAPI_API_URL=http://localhost:1337
+STRAPI_REVALIDATE_SECONDS=60
+```
+
+Optional read token: `STRAPI_API_TOKEN` (Strapi admin → Settings → API Tokens).
+
+### Storefront only
 
 ```bash
 cd apps/storefront
@@ -152,20 +175,23 @@ npm run optimize:images
 
 Updates catalog paths to `.webp` under `public/covers/` and `public/categories/`. See [`PERFORMANCE.md`](./apps/storefront/PERFORMANCE.md).
 
-### Strapi (when ready)
+Production CMS example:
 
 ```env
 STRAPI_API_URL=https://cms.example.com
+NEXT_PUBLIC_STRAPI_URL=https://cms.example.com
 NEXT_PUBLIC_STRAPI_IMAGE_HOST=cms.example.com
 STRAPI_REVALIDATE_SECONDS=60
 ```
 
-Config stub: `apps/storefront/src/config/strapi.ts`.
+Config: `apps/storefront/src/config/strapi.ts`.
 
 ## Code quality
 
 | Command | What it does |
 |---------|----------------|
+| `npm run dev:cms` | Strapi develop (`apps/strapi`) |
+| `npm run build:cms` | Strapi production build |
 | `npm run lint` | ESLint (Next.js + TypeScript) |
 | `npm run lint:fix` | ESLint with auto-fix |
 | `npm run format` | Prettier write |
@@ -201,14 +227,6 @@ Novella intentionally avoids loud marketplace UI (heavy chrome, dense grids, clu
 - **Whitespace** — generous padding; light borders
 - **Cart UX** — header count + short “added to cart” on cards; full cart at `/cart` (no slide-out drawer)
 
-Blog and full catalog will move to **Strapi** later; mock posts and static book modules ship in the storefront for now.
+Blog, shop catalog, categories, and site copy are served from **Strapi** when configured; the storefront keeps static fallbacks for local work without the CMS.
 
-Checkout sends `POST /api/checkout` with `{ items: [{ id, quantity }] }` only — prices are computed on the server from the catalog (Strapi later).
-
-## Git identity (local to this machine)
-
-```bash
-cd "/Users/yemaung/Documents/Shwe Portfolio/novella"
-git config user.name "Shwe Yee Winn"
-git config user.email "yonngelay@gmail.com"
-```
+Checkout sends `POST /api/checkout` with `{ items: [{ id, quantity }] }` only — prices are computed on the server from the catalog (Strapi when available).
