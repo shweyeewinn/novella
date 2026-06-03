@@ -10,6 +10,12 @@
   "scripts": {
     "dev": "npm run dev --workspace=storefront",
     "build": "npm run build --workspace=storefront",
-    "lint": "npm run lint --workspace=storefront"
+    "lint": "npm run lint --workspace=storefront",
+    "lint:fix": "npm run lint:fix --workspace=storefront",
+    "format": "npm run format --workspace=storefront",
+    "format:check": "npm run format:check --workspace=storefront",
+    "typecheck": "npm run typecheck --workspace=storefront",
+    "check": "npm run typecheck && npm run lint && npm run format:check",
+    "optimize:images": "npm run optimize:images --workspace=storefront"
   }
 }
