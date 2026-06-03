@@ -34,7 +34,7 @@ Default repo identity stays **Shwe Yee Winn** / **yonngelay@gmail.com** for UI a
 For **backend** branches (e.g. `feature/strapi-cms-backend`), local git loads `.gitconfig-author-backend` via:
 
 ```bash
-git config --local includeIf.onbranch:feature/strapi-cms-backend.path .gitconfig-author-backend
+git config --local includeIf.onbranch:feature/strapi-cms-backend.path "$(pwd)/.gitconfig-author-backend"
 ```
 
 That sets commits on that branch to **Ye Maung Maung** / **yemaung.dev@gmail.com** automatically.
