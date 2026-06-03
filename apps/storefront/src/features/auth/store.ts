@@ -2,18 +2,18 @@
 
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
-import {
-  emptyShippingAddress,
-  type ShippingAddress,
-  type User,
-} from "@/features/auth/types";
+import { emptyShippingAddress, type ShippingAddress, type User } from "@/features/auth/types";
 
 type StoredUser = User & { password: string };
 
 type AuthState = {
   users: StoredUser[];
   sessionUserId: string | null;
-  signup: (name: string, email: string, password: string) => { ok: true } | { ok: false; error: string };
+  signup: (
+    name: string,
+    email: string,
+    password: string
+  ) => { ok: true } | { ok: false; error: string };
   login: (email: string, password: string) => { ok: true } | { ok: false; error: string };
   logout: () => void;
   updateProfile: (patch: { name?: string }) => void;
@@ -25,8 +25,8 @@ function normalizeEmail(email: string): string {
   return email.trim().toLowerCase();
 }
 
-function toPublicUser(user: StoredUser): User {
-  const { password: _p, ...publicUser } = user;
+function toPublicUser({ password: _password, ...publicUser }: StoredUser): User {
+  void _password;
   return publicUser;
 }
 
@@ -64,9 +64,7 @@ export const useAuthStore = create<AuthState>()(
 
       login: (email, password) => {
         const normalized = normalizeEmail(email);
-        const user = get().users.find(
-          (u) => u.email === normalized && u.password === password
-        );
+        const user = get().users.find((u) => u.email === normalized && u.password === password);
         if (!user) {
           return { ok: false, error: "Email or password is incorrect." };
         }

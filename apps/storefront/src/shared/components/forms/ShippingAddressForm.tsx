@@ -20,8 +20,6 @@ export default function ShippingAddressForm({
   idPrefix = "ship",
   required = true,
 }: ShippingAddressFormProps) {
-  const req = required ? "required" : undefined;
-
   const set = (field: keyof ShippingAddress, fieldValue: string) => {
     onChange({ ...value, [field]: fieldValue });
   };

@@ -23,6 +23,8 @@ export function useShopSearch(delayMs = SEARCH_DEBOUNCE_MS) {
   const skipNextUrlSync = useRef(false);
 
   useEffect(() => {
+    // Sync header input when the URL query changes (back/forward, shared links).
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- external URL is source of truth
     setInput(urlQuery);
     skipNextUrlSync.current = true;
   }, [urlQuery]);
@@ -52,10 +54,7 @@ export function useShopSearch(delayMs = SEARCH_DEBOUNCE_MS) {
       return;
     }
 
-    router.replace(
-      `${SEARCH_PATH}?q=${encodeURIComponent(next)}`,
-      { scroll: false }
-    );
+    router.replace(`${SEARCH_PATH}?q=${encodeURIComponent(next)}`, { scroll: false });
   }, [debouncedQuery, input, urlQuery, isSearchPage, pathname, router]);
 
   const isSearching = input.trim() !== debouncedQuery.trim();

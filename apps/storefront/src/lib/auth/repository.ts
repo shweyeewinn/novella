@@ -17,8 +17,8 @@ async function save(users: StoredUser[]) {
   await writeJsonStore<UsersFile>(STORE, { users });
 }
 
-function toPublicUser(user: StoredUser): User {
-  const { passwordHash: _p, shipping, ...rest } = user;
+function toPublicUser({ passwordHash: _passwordHash, shipping, ...rest }: StoredUser): User {
+  void _passwordHash;
   return {
     ...rest,
     shipping: normalizeShippingAddress(shipping),

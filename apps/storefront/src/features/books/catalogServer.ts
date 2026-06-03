@@ -3,11 +3,7 @@ import {
   getBookById as getStaticBookById,
   getBookBySlug as getStaticBookBySlug,
   getBooksByCollection as getStaticBooksByCollection,
-  getPreOrderBooks as getStaticPreOrderBooks,
-  getNewReleaseBooks as getStaticNewReleaseBooks,
   getFeaturedBooks as getStaticFeaturedBooks,
-  getAllAuthors as getStaticAllAuthors,
-  getBooksByAuthor as getStaticBooksByAuthor,
 } from "@/features/books/catalog";
 import type { Book } from "@/features/books/types";
 import { isStrapiEnabled } from "@/lib/strapi/client";
