@@ -11,7 +11,7 @@ export default function ContactForm() {
     return (
       <p className="font-sans text-ink-muted">
         Thank you. For urgent order questions, email{" "}
-        <a href={`mailto:${site.owner.email}`} className="text-accent hover:underline">
+        <a href={`mailto:${site.owner.email}`} className="text-ink hover:underline">
           {site.owner.email}
         </a>{" "}
         directly.
@@ -35,7 +35,7 @@ export default function ContactForm() {
           id="name"
           name="name"
           required
-          className="mt-1 w-full rounded-md border border-border bg-paper px-4 py-2.5 font-sans text-sm focus:border-accent focus:outline-none"
+          className="mt-1 w-full rounded-md border border-border bg-paper px-4 py-2.5 font-sans text-sm focus:border-ink focus:outline-none"
         />
       </div>
       <div>
@@ -47,7 +47,7 @@ export default function ContactForm() {
           name="email"
           type="email"
           required
-          className="mt-1 w-full rounded-md border border-border bg-paper px-4 py-2.5 font-sans text-sm focus:border-accent focus:outline-none"
+          className="mt-1 w-full rounded-md border border-border bg-paper px-4 py-2.5 font-sans text-sm focus:border-ink focus:outline-none"
         />
       </div>
       <div>
@@ -59,13 +59,13 @@ export default function ContactForm() {
           name="message"
           required
           rows={5}
-          className="mt-1 w-full rounded-md border border-border bg-paper px-4 py-2.5 font-sans text-sm focus:border-accent focus:outline-none"
+          className="mt-1 w-full rounded-md border border-border bg-paper px-4 py-2.5 font-sans text-sm focus:border-ink focus:outline-none"
         />
       </div>
       <Button type="submit">Send message</Button>
       <p className="font-sans text-xs text-ink-muted">
         Or email{" "}
-        <a href={`mailto:${site.owner.email}`} className="text-accent hover:underline">
+        <a href={`mailto:${site.owner.email}`} className="text-ink hover:underline">
           {site.owner.email}
         </a>
         . We aim to reply within 2 business days.
