@@ -24,6 +24,12 @@ export type Book = {
   publisher?: string;
   publishedYear?: number;
   coverHue: number;
+  /** Jacket image under /public, e.g. /covers/pre-order/slug.png */
+  coverImageSrc?: string;
+  /** Home/shop collection slug, e.g. pre-order */
+  collections?: string[];
+  /** Pre-order titles can be ordered before stock arrives */
+  preOrder?: boolean;
 };
 
 export type CartLineInput = {
