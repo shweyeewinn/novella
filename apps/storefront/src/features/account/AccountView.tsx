@@ -70,7 +70,7 @@ export default function AccountView({
           <h1 className="font-serif text-3xl text-ink sm:text-4xl">My account</h1>
           <p className="font-sans text-ink-muted">{user.email}</p>
         </div>
-        <Button type="button" variant="secondary" onClick={handleLogout}>
+        <Button type="button" onClick={handleLogout}>
           Log out
         </Button>
       </header>
