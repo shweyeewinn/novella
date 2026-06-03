@@ -3,11 +3,7 @@
  * Set env vars in production (see PERFORMANCE.md).
  */
 function resolveApiUrl(): string {
-  return (
-    process.env.STRAPI_API_URL?.trim() ||
-    process.env.NEXT_PUBLIC_STRAPI_URL?.trim() ||
-    ""
-  );
+  return process.env.STRAPI_API_URL?.trim() || process.env.NEXT_PUBLIC_STRAPI_URL?.trim() || "";
 }
 
 export const strapiConfig = {

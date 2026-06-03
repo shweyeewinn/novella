@@ -44,9 +44,7 @@ export async function fetchBookByIdFromStrapi(bookId: string): Promise<Book | nu
   return entry ? mapStrapiBook(entry) : null;
 }
 
-export async function fetchBooksByCollectionFromStrapi(
-  collection: string
-): Promise<Book[]> {
+export async function fetchBooksByCollectionFromStrapi(collection: string): Promise<Book[]> {
   const all = await fetchAllBooksFromStrapi();
   return all.filter((b) => b.collections?.includes(collection));
 }

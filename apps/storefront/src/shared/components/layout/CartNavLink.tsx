@@ -18,13 +18,15 @@ function selectCartItemCount(state: { items: { quantity: number }[] }): number {
 }
 
 export default function CartNavLink() {
-  const mounted = useSyncExternalStore(subscribeNoop, () => true, () => false);
+  const mounted = useSyncExternalStore(
+    subscribeNoop,
+    () => true,
+    () => false
+  );
   const itemCount = useCartStore(selectCartItemCount);
 
   const ariaLabel =
-    itemCount > 0
-      ? `Cart, ${itemCount} ${itemCount === 1 ? "item" : "items"}`
-      : "Cart";
+    itemCount > 0 ? `Cart, ${itemCount} ${itemCount === 1 ? "item" : "items"}` : "Cart";
 
   return (
     <Link

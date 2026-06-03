@@ -41,21 +41,15 @@ export const useOrdersStore = create<OrdersState>()(
         return get()
           .orders.filter(
             (o) =>
-              o.userId === userId ||
-              (normalized && o.email.trim().toLowerCase() === normalized)
+              o.userId === userId || (normalized && o.email.trim().toLowerCase() === normalized)
           )
-          .sort(
-            (a, b) =>
-              new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
-          );
+          .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
       },
 
       updateOrderStatus: (orderId, status, trackingNote) => {
         set((state) => ({
           orders: state.orders.map((o) =>
-            o.id === orderId
-              ? { ...o, status, trackingNote: trackingNote ?? o.trackingNote }
-              : o
+            o.id === orderId ? { ...o, status, trackingNote: trackingNote ?? o.trackingNote } : o
           ),
         }));
       },

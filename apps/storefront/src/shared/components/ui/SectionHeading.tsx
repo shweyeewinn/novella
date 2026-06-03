@@ -17,10 +17,7 @@ export default function SectionHeading({
 }: SectionHeadingProps) {
   return (
     <div className="flex items-baseline justify-between gap-4">
-      <h2
-        id={id}
-        className="min-w-0 font-serif text-2xl text-ink sm:text-3xl"
-      >
+      <h2 id={id} className="min-w-0 font-serif text-2xl text-ink sm:text-3xl">
         {title}
       </h2>
       <SectionViewMoreLink variant="inline" href={href} className="shrink-0">

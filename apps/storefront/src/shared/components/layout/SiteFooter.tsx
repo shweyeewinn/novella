@@ -12,10 +12,7 @@ export default function SiteFooter() {
 
   return (
     <footer className="mt-auto overflow-hidden">
-      <div
-        className="h-1 bg-gradient-to-r from-primary via-gold to-primary"
-        aria-hidden
-      />
+      <div className="h-1 bg-gradient-to-r from-primary via-gold to-primary" aria-hidden />
 
       <div className="bg-ink text-paper">
         <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6 sm:py-14">
@@ -64,8 +61,7 @@ export default function SiteFooter() {
         <div className="border-t border-paper/10">
           <div className="mx-auto flex max-w-6xl flex-col gap-3 px-4 py-6 font-sans text-sm sm:flex-row sm:items-center sm:justify-between sm:px-6">
             <p className="text-paper/70">
-              © {year}{" "}
-              <span className="font-serif font-semibold text-paper">{site.name}</span>
+              © {year} <span className="font-serif font-semibold text-paper">{site.name}</span>
               {" · "}
               {site.owner.name}
             </p>

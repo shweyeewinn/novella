@@ -21,8 +21,7 @@ export default async function CheckoutSuccessPage({
   const params = await searchParams;
   const stored = params.order ? await findOrderById(params.order) : null;
   const orderId = stored?.id ?? params.order ?? "NOV-PENDING";
-  const totalCents =
-    stored?.totalCents ?? (params.total ? Number(params.total) : null);
+  const totalCents = stored?.totalCents ?? (params.total ? Number(params.total) : null);
   const email = stored?.email ?? params.email;
   const proofUploaded = Boolean(stored?.paymentProof);
 
@@ -45,8 +44,8 @@ export default async function CheckoutSuccessPage({
         </p>
         {email ? (
           <p className="font-sans text-sm text-ink-muted">
-            We will email <span className="font-medium text-ink">{email}</span> when
-            we confirm your payment in our bank account.
+            We will email <span className="font-medium text-ink">{email}</span> when we confirm your
+            payment in our bank account.
           </p>
         ) : null}
         <p className="font-sans text-sm text-ink-muted">
@@ -64,9 +63,7 @@ export default async function CheckoutSuccessPage({
       <BankTransferInstructions
         orderId={orderId}
         totalCents={totalCents}
-        proofSection={
-          <PaymentProofUpload orderId={orderId} alreadyUploaded={proofUploaded} />
-        }
+        proofSection={<PaymentProofUpload orderId={orderId} alreadyUploaded={proofUploaded} />}
       />
 
       <ButtonLink variant="secondary" href="/shop">

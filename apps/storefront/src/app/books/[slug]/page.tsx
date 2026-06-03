@@ -34,9 +34,7 @@ export default async function BookDetailPage({ params }: PageProps) {
   if (!book) notFound();
 
   const all = await getAllBooks();
-  const related = all
-    .filter((b) => b.id !== book.id && b.category === book.category)
-    .slice(0, 4);
+  const related = all.filter((b) => b.id !== book.id && b.category === book.category).slice(0, 4);
 
   return (
     <div className="space-y-12">

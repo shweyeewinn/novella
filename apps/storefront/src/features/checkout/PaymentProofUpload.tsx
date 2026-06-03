@@ -30,10 +30,10 @@ export default function PaymentProofUpload({
     formData.append("proof", file);
 
     try {
-      const res = await fetch(
-        `/api/orders/${encodeURIComponent(orderId)}/payment-proof`,
-        { method: "POST", body: formData }
-      );
+      const res = await fetch(`/api/orders/${encodeURIComponent(orderId)}/payment-proof`, {
+        method: "POST",
+        body: formData,
+      });
       const data = (await res.json()) as { message?: string; error?: string };
       if (!res.ok) {
         setError(data.error ?? "Upload failed");
@@ -50,18 +50,13 @@ export default function PaymentProofUpload({
 
   if (uploaded) {
     return (
-      <div
-        className="rounded-xl border border-primary/25 bg-paper px-5 py-4"
-        role="status"
-      >
-        <p className="font-sans text-sm font-medium text-ink">
-          Payment proof received
-        </p>
+      <div className="rounded-xl border border-primary/25 bg-paper px-5 py-4" role="status">
+        <p className="font-sans text-sm font-medium text-ink">Payment proof received</p>
         <p className="mt-1 font-sans text-sm text-ink-muted">
           Thank you. Your order stays{" "}
-          <span className="font-medium text-ink">Payment under review</span> until
-          we confirm the transfer in our bank account. Order{" "}
-          <span className="font-mono text-ink">{orderId}</span>. Track status in{" "}
+          <span className="font-medium text-ink">Payment under review</span> until we confirm the
+          transfer in our bank account. Order <span className="font-mono text-ink">{orderId}</span>.
+          Track status in{" "}
           <a href="/account" className="text-primary hover:underline">
             My account
           </a>{" "}
@@ -77,8 +72,8 @@ export default function PaymentProofUpload({
         <h3 className="font-serif text-lg text-ink">Upload payment proof</h3>
         <p className="font-sans text-sm text-ink-muted">
           Attach a screenshot or photo of your bank transfer. Include order{" "}
-          <span className="font-mono text-ink">{orderId}</span> in the transfer
-          reference when possible.
+          <span className="font-mono text-ink">{orderId}</span> in the transfer reference when
+          possible.
         </p>
       </div>
       <div className="space-y-3">

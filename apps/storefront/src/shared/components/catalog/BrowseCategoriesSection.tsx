@@ -19,11 +19,7 @@ export default function BrowseCategoriesSection({
   return (
     <section className="space-y-8">
       {showMoreButton ? (
-        <SectionHeading
-          title="Browse by category"
-          href={moreHref}
-          linkLabel={moreLabel}
-        />
+        <SectionHeading title="Browse by category" href={moreHref} linkLabel={moreLabel} />
       ) : (
         <h2 className="font-serif text-2xl text-ink sm:text-3xl">Browse by category</h2>
       )}

@@ -107,11 +107,7 @@ export default function AccountView({
           </p>
         </div>
         <form onSubmit={handleShippingSave} className="space-y-4">
-          <ShippingAddressForm
-            value={shipping}
-            onChange={setShipping}
-            idPrefix="account-ship"
-          />
+          <ShippingAddressForm value={shipping} onChange={setShipping} idPrefix="account-ship" />
           <div className="flex flex-wrap items-center gap-3">
             <Button type="submit" disabled={!isShippingComplete(shipping)}>
               Save address

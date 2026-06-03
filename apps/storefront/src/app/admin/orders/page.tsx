@@ -30,18 +30,14 @@ export default async function AdminOrdersPage() {
         <h1 className="font-serif text-3xl text-ink sm:text-4xl">Admin — Orders</h1>
         <p className="font-sans text-sm text-ink-muted">
           Match each order to your bank statement, then confirm payment. Use{" "}
-          <span className="font-medium text-ink">Fulfillment</span> to move paid orders
-          through <span className="font-medium text-ink">Mark preparing</span> →{" "}
+          <span className="font-medium text-ink">Fulfillment</span> to move paid orders through{" "}
+          <span className="font-medium text-ink">Mark preparing</span> →{" "}
           <span className="font-medium text-ink">Mark shipped</span> →{" "}
           <span className="font-medium text-ink">Mark delivered</span>.
         </p>
       </div>
 
-      {signedIn ? (
-        <AdminOrdersView initialOrders={await listAllOrders()} />
-      ) : (
-        <AdminLoginForm />
-      )}
+      {signedIn ? <AdminOrdersView initialOrders={await listAllOrders()} /> : <AdminLoginForm />}
     </div>
   );
 }

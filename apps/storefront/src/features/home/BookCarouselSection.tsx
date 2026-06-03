@@ -51,11 +51,7 @@ export default function BookCarouselSection({
 
   return (
     <section className="space-y-6" aria-labelledby={`section-${sectionId}`}>
-      <SectionHeading
-        id={`section-${sectionId}`}
-        title={title}
-        href={readMoreHref}
-      />
+      <SectionHeading id={`section-${sectionId}`} title={title} href={readMoreHref} />
 
       <div className="relative px-1 sm:px-12">
         <button

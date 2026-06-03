@@ -2,14 +2,14 @@
 
 ## What is already configured
 
-| Item | Location |
-|------|----------|
-| WebP/AVIF via Next Image | `next.config.ts` → `images.formats` |
-| Long-cache static assets (CDN-friendly) | `next.config.ts` → `headers()` for `/covers`, `/categories`, logo/favicons |
-| Compressed WebP assets | `public/covers`, `public/categories` — regenerate with `npm run optimize:images` |
-| Trimmed Google Fonts (400 + 600 only) | `src/app/layout.tsx` |
-| Server-rendered shop (20 books/page) | `src/app/shop/page.tsx`, `getShopPageData.ts` |
-| Strapi-ready config | `src/config/strapi.ts`, `NEXT_PUBLIC_STRAPI_IMAGE_HOST` |
+| Item                                    | Location                                                                         |
+| --------------------------------------- | -------------------------------------------------------------------------------- |
+| WebP/AVIF via Next Image                | `next.config.ts` → `images.formats`                                              |
+| Long-cache static assets (CDN-friendly) | `next.config.ts` → `headers()` for `/covers`, `/categories`, logo/favicons       |
+| Compressed WebP assets                  | `public/covers`, `public/categories` — regenerate with `npm run optimize:images` |
+| Trimmed Google Fonts (400 + 600 only)   | `src/app/layout.tsx`                                                             |
+| Server-rendered shop (20 books/page)    | `src/app/shop/page.tsx`, `getShopPageData.ts`                                    |
+| Strapi-ready config                     | `src/config/strapi.ts`, `NEXT_PUBLIC_STRAPI_IMAGE_HOST`                          |
 
 ## Compress images after adding new covers
 

@@ -90,11 +90,7 @@ function AuthorScriptSection({
           </p>
         )}
       </div>
-      <AuthorList
-        authors={authors}
-        sectionLabel={title}
-        titleCountByAuthor={titleCountByAuthor}
-      />
+      <AuthorList authors={authors} sectionLabel={title} titleCountByAuthor={titleCountByAuthor} />
     </section>
   );
 }

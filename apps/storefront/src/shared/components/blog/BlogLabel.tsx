@@ -8,11 +8,9 @@ type BlogLabelProps = {
 };
 
 const variantClass: Record<NonNullable<BlogLabelProps["variant"]>, string> = {
-  default:
-    "font-sans text-sm font-semibold uppercase tracking-wide text-primary sm:text-base",
+  default: "font-sans text-sm font-semibold uppercase tracking-wide text-primary sm:text-base",
   hero: "font-sans text-base font-semibold uppercase tracking-wide text-primary sm:text-lg",
-  onDark:
-    "font-sans text-sm font-semibold uppercase tracking-wide text-gold sm:text-base",
+  onDark: "font-sans text-sm font-semibold uppercase tracking-wide text-gold sm:text-base",
 };
 
 export default function BlogLabel({
@@ -20,7 +18,5 @@ export default function BlogLabel({
   variant = "default",
   className = "",
 }: BlogLabelProps) {
-  return (
-    <p className={`${variantClass[variant]} ${className}`.trim()}>{children}</p>
-  );
+  return <p className={`${variantClass[variant]} ${className}`.trim()}>{children}</p>;
 }

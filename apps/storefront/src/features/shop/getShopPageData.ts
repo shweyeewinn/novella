@@ -5,10 +5,7 @@ import {
   getInStockBooks,
   type ShopFilters,
 } from "@/features/books/catalog";
-import {
-  getAllBooks,
-  getBooksByCollection,
-} from "@/features/books/catalogServer";
+import { getAllBooks, getBooksByCollection } from "@/features/books/catalogServer";
 import type { Book, BookCategory } from "@/features/books/types";
 
 export const SHOP_PAGE_SIZE = 20;
@@ -34,7 +31,10 @@ function parseCategory(param: string | null): BookCategory | undefined {
 
 function parseListParam(value: string | null): string[] {
   if (!value?.trim()) return [];
-  return value.split(",").map((s) => s.trim()).filter(Boolean);
+  return value
+    .split(",")
+    .map((s) => s.trim())
+    .filter(Boolean);
 }
 
 export function parseShopFilters(params: URLSearchParams): ShopFilters {
@@ -70,9 +70,7 @@ export async function getShopPageData(params: URLSearchParams): Promise<ShopPage
   const pageParam = Math.max(1, Number.parseInt(params.get("page") ?? "1", 10) || 1);
   const filters = parseShopFilters(params);
 
-  const base = collection
-    ? await getBooksByCollection(collection)
-    : await getAllBooks();
+  const base = collection ? await getBooksByCollection(collection) : await getAllBooks();
   const catalog = getInStockBooks(base);
   const inventoryCount = countInStockBooks(catalog);
   const results = filterBooks(catalog, filters);

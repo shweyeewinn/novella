@@ -7,9 +7,7 @@ function hasCoverImage(book: Book): boolean {
   return Boolean(book.coverImageSrc?.trim());
 }
 
-const allCatalogBooks = [...mockBooks, ...preOrderBooks, ...newReleaseBooks].filter(
-  hasCoverImage
-);
+const allCatalogBooks = [...mockBooks, ...preOrderBooks, ...newReleaseBooks].filter(hasCoverImage);
 
 export function getAllBooks(): Book[] {
   return allCatalogBooks;
@@ -85,9 +83,7 @@ export function filterBooks(books: Book[], filters: ShopFilters): Book[] {
     const q = filters.query.trim().toLowerCase();
     if (q) {
       result = result.filter(
-        (b) =>
-          b.title.toLowerCase().includes(q) ||
-          b.author.toLowerCase().includes(q)
+        (b) => b.title.toLowerCase().includes(q) || b.author.toLowerCase().includes(q)
       );
     }
   }

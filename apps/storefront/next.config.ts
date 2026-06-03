@@ -24,7 +24,8 @@ const nextConfig: NextConfig = {
         headers: staticAssetCache,
       },
       {
-        source: "/:file(favicon-16.png|favicon-32.png|favicon-48.png|favicon-192.png|apple-touch-icon.png)",
+        source:
+          "/:file(favicon-16.png|favicon-32.png|favicon-48.png|favicon-192.png|apple-touch-icon.png)",
         headers: staticAssetCache,
       },
     ];

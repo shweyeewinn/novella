@@ -1,8 +1,5 @@
 import Link from "next/link";
-import {
-  BLOG_SECTION_MAX_POSTS,
-  categoryLabels,
-} from "@/features/blog/catalog";
+import { BLOG_SECTION_MAX_POSTS, categoryLabels } from "@/features/blog/catalog";
 import type { BlogCategory, BlogPost } from "@/features/blog/types";
 import BlogCard from "@/shared/components/blog/BlogCard";
 import BlogFeaturedCard from "@/shared/components/blog/BlogFeaturedCard";

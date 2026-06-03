@@ -80,7 +80,7 @@ export async function POST(request: Request) {
     email,
     lineItems,
     totalCents,
-    shipping: needsShipping ? body.shipping ?? null : null,
+    shipping: needsShipping ? (body.shipping ?? null) : null,
   });
 
   const params = new URLSearchParams({

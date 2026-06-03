@@ -27,9 +27,7 @@ export const useCartStore = create<CartState>()(
           if (existing) {
             return {
               items: state.items.map((i) =>
-                i.bookId === bookId
-                  ? { ...i, quantity: i.quantity + quantity }
-                  : i
+                i.bookId === bookId ? { ...i, quantity: i.quantity + quantity } : i
               ),
             };
           }
@@ -42,9 +40,7 @@ export const useCartStore = create<CartState>()(
           return;
         }
         set((state) => ({
-          items: state.items.map((i) =>
-            i.bookId === bookId ? { ...i, quantity } : i
-          ),
+          items: state.items.map((i) => (i.bookId === bookId ? { ...i, quantity } : i)),
         }));
       },
       removeItem: (bookId) => {
@@ -53,8 +49,7 @@ export const useCartStore = create<CartState>()(
         }));
       },
       clearCart: () => set({ items: [] }),
-      totalItems: () =>
-        get().items.reduce((sum, i) => sum + i.quantity, 0),
+      totalItems: () => get().items.reduce((sum, i) => sum + i.quantity, 0),
     }),
     { name: "novella-cart" }
   )

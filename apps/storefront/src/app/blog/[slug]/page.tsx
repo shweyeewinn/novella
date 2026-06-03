@@ -36,15 +36,11 @@ export default async function BlogPostPage({ params }: PageProps) {
 
   return (
     <article className="w-full space-y-10">
-      <Breadcrumbs
-        items={[{ label: "Blog", href: "/blog" }, { label: post.title }]}
-      />
+      <Breadcrumbs items={[{ label: "Blog", href: "/blog" }, { label: post.title }]} />
 
       <header className="space-y-4 border-b border-border pb-8">
         <BlogLabel>{categoryLabels[post.category]}</BlogLabel>
-        <h1 className="font-serif text-3xl leading-tight text-ink sm:text-4xl">
-          {post.title}
-        </h1>
+        <h1 className="font-serif text-3xl leading-tight text-ink sm:text-4xl">{post.title}</h1>
         <BlogPostMeta post={post} showAuthor tone="default" className="mb-2 sm:mb-4" />
         <p className="font-sans text-lg leading-relaxed text-ink-muted">{post.excerpt}</p>
       </header>

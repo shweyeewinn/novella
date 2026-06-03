@@ -7,8 +7,7 @@ export default function StarRating({
 }) {
   return (
     <p className="font-sans text-sm text-ink-muted">
-      <span className="text-gold">★</span> {rating.toFixed(1)}{" "}
-      <span>· {reviewCount} reviews</span>
+      <span className="text-gold">★</span> {rating.toFixed(1)} <span>· {reviewCount} reviews</span>
     </p>
   );
 }

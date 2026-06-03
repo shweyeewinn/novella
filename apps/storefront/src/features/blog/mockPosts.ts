@@ -51,8 +51,7 @@ When we asked which books she gifts most often, she laughed. “Short novels. Lo
   {
     slug: "starting-a-neighborhood-book-club",
     title: "Starting a neighborhood book club that actually meets",
-    excerpt:
-      "Small groups, clear dates, and one rule: the host picks a book under 300 pages.",
+    excerpt: "Small groups, clear dates, and one rule: the host picks a book under 300 pages.",
     category: "community",
     author: "Novella Editorial",
     publishedAt: "2026-03-28",
@@ -99,8 +98,7 @@ We will introduce each title on the shop as stock arrives. If you run a club, co
   {
     slug: "the-art-of-the-author-note",
     title: "The art of the author note (and why we read them)",
-    excerpt:
-      "A good note is not a summary—it is a handshake before the first chapter.",
+    excerpt: "A good note is not a summary—it is a handshake before the first chapter.",
     category: "authors",
     author: "Shwe Yee Winn",
     publishedAt: "2026-03-10",
@@ -147,8 +145,7 @@ The best jackets we have shipped are not the loudest—they are the most legible
   {
     slug: "reprints-and-second-editions",
     title: "When a book earns a reprint",
-    excerpt:
-      "Corrections, new forewords, and the quiet celebration of a title that sold through.",
+    excerpt: "Corrections, new forewords, and the quiet celebration of a title that sold through.",
     category: "publishing",
     author: "Editorial",
     publishedAt: "2026-03-18",
@@ -163,8 +160,7 @@ If you missed a title the first time, reprints are your second chance. We list t
   {
     slug: "reading-with-strangers",
     title: "Reading with strangers: open shelves in public spaces",
-    excerpt:
-      "Little free libraries, shop windows, and the etiquette of leaving a book you loved.",
+    excerpt: "Little free libraries, shop windows, and the etiquette of leaving a book you loved.",
     category: "community",
     author: "Novella Editorial",
     publishedAt: "2026-05-05",

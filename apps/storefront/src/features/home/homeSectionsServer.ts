@@ -25,12 +25,8 @@ async function booksForSection(sectionId: string): Promise<Book[]> {
 
   const pool = (await getAllBooks()).filter((b) => !b.collections?.length);
   if (pool.length === 0) return [];
-  const start =
-    homeBookSections.findIndex((s) => s.id === sectionId) % pool.length;
-  return Array.from(
-    { length: BOOKS_PER_SECTION },
-    (_, i) => pool[(start + i) % pool.length]
-  );
+  const start = homeBookSections.findIndex((s) => s.id === sectionId) % pool.length;
+  return Array.from({ length: BOOKS_PER_SECTION }, (_, i) => pool[(start + i) % pool.length]);
 }
 
 export async function getBooksForHomeSection(sectionIndex: number): Promise<Book[]> {

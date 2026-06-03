@@ -3,10 +3,7 @@
 import { useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import { formatPrice } from "@/features/books/catalog";
-import {
-  getOrderStatusBadgeClass,
-  orderStatusLabels,
-} from "@/features/orders/orderStatus";
+import { getOrderStatusBadgeClass, orderStatusLabels } from "@/features/orders/orderStatus";
 import {
   fulfillmentStepIndex,
   isInFulfillmentPipeline,
@@ -18,12 +15,7 @@ import { Button } from "@/shared/components/ui/Button";
 
 type Filter = "needs_review" | "fulfillment" | "all";
 
-const FULFILLMENT_STEP_LABELS = [
-  "Payment confirmed",
-  "Preparing",
-  "Shipped",
-  "Delivered",
-] as const;
+const FULFILLMENT_STEP_LABELS = ["Payment confirmed", "Preparing", "Shipped", "Delivered"] as const;
 
 function formatOrderDate(iso: string): string {
   return new Intl.DateTimeFormat("en-US", {
@@ -86,8 +78,7 @@ export default function AdminOrdersView({ initialOrders }: AdminOrdersViewProps)
 
   const filterHint: Record<Filter, string> = {
     needs_review: "Confirm payments after matching transfers in your bank account.",
-    fulfillment:
-      "Move orders through preparing → shipped → delivered after payment is confirmed.",
+    fulfillment: "Move orders through preparing → shipped → delivered after payment is confirmed.",
     all: "All orders — payment review and fulfillment.",
   };
 
@@ -114,9 +105,7 @@ export default function AdminOrdersView({ initialOrders }: AdminOrdersViewProps)
       return;
     }
 
-    setOrders((prev) =>
-      prev.map((o) => (o.id === data.order!.id ? data.order! : o))
-    );
+    setOrders((prev) => prev.map((o) => (o.id === data.order!.id ? data.order! : o)));
     setMessage(`Order ${orderId} → ${orderStatusLabels[status]}`);
     router.refresh();
   }
@@ -172,10 +161,7 @@ export default function AdminOrdersView({ initialOrders }: AdminOrdersViewProps)
             const showProgress = isInFulfillmentPipeline(order.status);
 
             return (
-              <li
-                key={order.id}
-                className="rounded-xl border border-border bg-paper p-5 sm:p-6"
-              >
+              <li key={order.id} className="rounded-xl border border-border bg-paper p-5 sm:p-6">
                 <div className="flex flex-wrap items-start justify-between gap-3">
                   <div>
                     <p className="font-mono text-sm font-semibold text-ink">{order.id}</p>
@@ -222,9 +208,7 @@ export default function AdminOrdersView({ initialOrders }: AdminOrdersViewProps)
                         </span>
                       </p>
                     ) : (
-                      <p className="mt-3 font-sans text-sm text-ink-muted">
-                        No proof uploaded yet
-                      </p>
+                      <p className="mt-3 font-sans text-sm text-ink-muted">No proof uploaded yet</p>
                     )}
                     <div className="mt-4 flex flex-wrap gap-2">
                       <Button
@@ -251,9 +235,7 @@ export default function AdminOrdersView({ initialOrders }: AdminOrdersViewProps)
                     <Button
                       type="button"
                       disabled={busyId === order.id}
-                      onClick={() =>
-                        updateStatus(order.id, fulfillmentAction.next)
-                      }
+                      onClick={() => updateStatus(order.id, fulfillmentAction.next)}
                     >
                       {busyId === order.id ? "Saving…" : fulfillmentAction.label}
                     </Button>
@@ -261,9 +243,7 @@ export default function AdminOrdersView({ initialOrders }: AdminOrdersViewProps)
                 ) : null}
 
                 {order.status === "delivered" ? (
-                  <p className="mt-4 font-sans text-sm text-ink-muted">
-                    Fulfillment complete.
-                  </p>
+                  <p className="mt-4 font-sans text-sm text-ink-muted">Fulfillment complete.</p>
                 ) : null}
               </li>
             );

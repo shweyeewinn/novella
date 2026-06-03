@@ -16,8 +16,7 @@ export default function SiteSearch({
   const search = useSearchState();
   const searchParams = useSearchParams();
   const pathname = usePathname();
-  const urlQuery =
-    pathname === SEARCH_PATH ? (searchParams.get("q") ?? "") : "";
+  const urlQuery = pathname === SEARCH_PATH ? (searchParams.get("q") ?? "") : "";
 
   if (!search) {
     return (

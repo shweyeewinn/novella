@@ -11,11 +11,7 @@ type HomeContentProps = {
   browseCategories: BrowseCategory[];
 };
 
-export default function HomeContent({
-  tagline,
-  sectionBooks,
-  browseCategories,
-}: HomeContentProps) {
+export default function HomeContent({ tagline, sectionBooks, browseCategories }: HomeContentProps) {
   return (
     <div className="flex flex-col gap-16 sm:gap-20">
       <section className="w-full space-y-6">

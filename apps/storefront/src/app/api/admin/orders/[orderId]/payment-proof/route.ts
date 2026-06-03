@@ -17,9 +17,7 @@ export async function GET(request: Request, context: RouteContext) {
   }
 
   try {
-    const bytes = await readFile(
-      paymentProofAbsolutePath(order.paymentProof.filename)
-    );
+    const bytes = await readFile(paymentProofAbsolutePath(order.paymentProof.filename));
     return new Response(bytes, {
       headers: {
         "Content-Type": order.paymentProof.mimeType,

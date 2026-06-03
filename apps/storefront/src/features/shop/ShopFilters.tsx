@@ -17,17 +17,10 @@ function FilterCheckbox({
   return (
     <label
       className={`inline-flex cursor-pointer items-center gap-2 rounded-md border bg-paper px-3 py-2 font-sans text-sm transition-colors ${
-        checked
-          ? "border-primary/40 bg-primary/5 text-ink"
-          : "border-border text-ink-muted"
+        checked ? "border-primary/40 bg-primary/5 text-ink" : "border-border text-ink-muted"
       }`}
     >
-      <input
-        type="checkbox"
-        checked={checked}
-        onChange={onChange}
-        className="accent-primary"
-      />
+      <input type="checkbox" checked={checked} onChange={onChange} className="accent-primary" />
       {label}
     </label>
   );
@@ -42,8 +35,7 @@ export default function ShopFilters({ filters }: ShopFiltersProps) {
   const searchParams = useSearchParams();
 
   const pushFilters = (next: ShopFilters) => {
-    const categories =
-      next.categories.length > 0 ? next.categories.join(",") : null;
+    const categories = next.categories.length > 0 ? next.categories.join(",") : null;
     const href = `/shop${shopQueryString(searchParams, {
       formats: null,
       categories,

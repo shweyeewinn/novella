@@ -18,10 +18,7 @@ export function createOrderId(): string {
   return `NOV-${Date.now().toString(36).toUpperCase()}`;
 }
 
-export async function createOrder(
-  id: string,
-  input: CreateOrderInput
-): Promise<Order> {
+export async function createOrder(id: string, input: CreateOrderInput): Promise<Order> {
   const now = new Date().toISOString();
   const order: Order = {
     id,
@@ -42,22 +39,15 @@ export async function findOrderById(id: string): Promise<Order | null> {
 
 export async function listAllOrders(): Promise<Order[]> {
   const orders = await load();
-  return orders.sort(
-    (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
-  );
+  return orders.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
 }
 
-export async function listOrdersForUser(
-  userId: string,
-  email: string
-): Promise<Order[]> {
+export async function listOrdersForUser(userId: string, email: string): Promise<Order[]> {
   const normalized = email.trim().toLowerCase();
   const orders = await load();
   return orders
     .filter(
-      (o) =>
-        o.userId === userId ||
-        (normalized && o.email.trim().toLowerCase() === normalized)
+      (o) => o.userId === userId || (normalized && o.email.trim().toLowerCase() === normalized)
     )
     .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
 }
@@ -88,8 +78,7 @@ export async function attachPaymentProofToOrder(
   const idx = orders.findIndex((o) => o.id === orderId);
   if (idx < 0) return null;
 
-  const status =
-    orders[idx].status === "pending_payment" ? "payment_review" : orders[idx].status;
+  const status = orders[idx].status === "pending_payment" ? "payment_review" : orders[idx].status;
 
   orders[idx] = {
     ...orders[idx],

@@ -8,11 +8,7 @@ export async function POST(request: Request) {
   const body = await parseJsonBody<SignupBody>(request);
   if (!body) return jsonError("Invalid request", 400);
 
-  const result = await createUser(
-    body.name ?? "",
-    body.email ?? "",
-    body.password ?? ""
-  );
+  const result = await createUser(body.name ?? "", body.email ?? "", body.password ?? "");
   if (!result.ok) return jsonError(result.error, 400);
 
   await setSessionCookie(result.user.id);
