@@ -1,10 +1,13 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { formatPrice } from "@/features/books/catalog";
+import { findOrderById } from "@/lib/orders/repository";
+import BankTransferInstructions from "@/shared/components/checkout/BankTransferInstructions";
 import { ButtonLink } from "@/shared/components/ui/Button";
 import { site } from "@/config/site";
 
 export const metadata: Metadata = {
-  title: "Order confirmed",
+  title: "Order received",
 };
 
 type SearchParams = Promise<{ order?: string; total?: string; email?: string }>;
@@ -15,48 +18,60 @@ export default async function CheckoutSuccessPage({
   searchParams: SearchParams;
 }) {
   const params = await searchParams;
-  const orderId = params.order ?? "NOV-PENDING";
-  const totalCents = params.total ? Number(params.total) : null;
-  const email = params.email ?? site.owner.email;
+  const stored = params.order ? await findOrderById(params.order) : null;
+  const orderId = stored?.id ?? params.order ?? "NOV-PENDING";
+  const totalCents =
+    stored?.totalCents ?? (params.total ? Number(params.total) : null);
+  const email = stored?.email ?? params.email;
 
   return (
-    <div className="mx-auto max-w-lg space-y-8 text-center sm:text-left">
-      <div
-        className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-sage/20 text-2xl text-gold sm:mx-0"
-        aria-hidden
-      >
-        ✓
-      </div>
-      <div className="space-y-3">
-        <h1 className="font-serif text-3xl text-ink sm:text-4xl">
-          Thank you for your order
-        </h1>
+    <div className="mx-auto w-full max-w-2xl space-y-8">
+      <div className="space-y-3 text-center sm:text-left">
+        <div
+          className="mx-auto flex h-14 w-14 items-center justify-center rounded-full border border-primary/30 bg-paper-muted text-2xl text-primary sm:mx-0"
+          aria-hidden
+        >
+          ✓
+        </div>
+        <h1 className="font-serif text-3xl text-ink sm:text-4xl">Order received</h1>
         <p className="font-sans text-ink-muted">
-          Order <span className="font-medium text-ink">{orderId}</span>
+          Thank you for ordering from {site.name}. Order{" "}
+          <span className="font-medium text-ink">{orderId}</span>
           {totalCents != null && !Number.isNaN(totalCents) ? (
             <> · {formatPrice(totalCents)}</>
           ) : null}
         </p>
+        {email ? (
+          <p className="font-sans text-sm text-ink-muted">
+            Confirmation details can be sent to{" "}
+            <span className="font-medium text-ink">{email}</span> once payment is verified.
+          </p>
+        ) : null}
+        <p className="font-sans text-sm text-ink-muted">
+          <Link href="/login" className="text-primary hover:underline">
+            Log in
+          </Link>{" "}
+          or{" "}
+          <Link href="/account" className="text-primary hover:underline">
+            open My account
+          </Link>{" "}
+          to track this order.
+        </p>
       </div>
-      <div className="space-y-4 rounded-lg border border-border bg-paper-muted/50 p-6 font-sans text-sm text-ink-muted text-left">
-        <p>
-          <strong className="text-ink">Digital orders:</strong> Check{" "}
-          <span className="text-ink">{email}</span> for download links within a few
-          minutes. Links expire in 24 hours.
-        </p>
-        <p>
-          <strong className="text-ink">Physical orders:</strong> We are preparing your
-          shipment. A confirmation email is on the way.
-        </p>
-        <p className="text-xs">
-          Fulfillment is processed on the server when payment completes (Stripe webhook
-          — coming soon). This demo page confirms checkout only.
-        </p>
-      </div>
+
+      <BankTransferInstructions orderId={orderId} totalCents={totalCents} />
+
+      <p className="font-sans text-sm text-ink-muted">
+        Once payment is done, please send the screenshot or proof of payment to the Messenger of
+        the {site.facebook.pageName} Facebook page to confirm your order and finish processing.
+      </p>
+
       <div className="flex flex-col gap-3 sm:flex-row">
-        <ButtonLink href="/shop">Continue shopping</ButtonLink>
-        <ButtonLink variant="secondary" href={`mailto:${site.owner.email}`}>
-          Contact support
+        <ButtonLink href={site.facebook.messengerUrl} target="_blank" rel="noopener noreferrer">
+          Send proof on Messenger
+        </ButtonLink>
+        <ButtonLink variant="secondary" href="/shop">
+          Continue shopping
         </ButtonLink>
       </div>
     </div>
