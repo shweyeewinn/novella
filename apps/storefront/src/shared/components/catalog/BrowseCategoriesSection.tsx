@@ -1,14 +1,17 @@
-import { browseCategories } from "@/features/catalog/browseCategories";
+import type { BrowseCategory } from "@/features/catalog/browseCategories";
+import { browseCategories as defaultCategories } from "@/features/catalog/browseCategories";
 import CategoryBrowseCard from "@/shared/components/catalog/CategoryBrowseCard";
 import SectionHeading from "@/shared/components/ui/SectionHeading";
 
 type BrowseCategoriesSectionProps = {
+  categories?: BrowseCategory[];
   showMoreButton?: boolean;
   moreHref?: string;
   moreLabel?: string;
 };
 
 export default function BrowseCategoriesSection({
+  categories = defaultCategories,
   showMoreButton = true,
   moreHref = "/categories",
   moreLabel = "More categories",
@@ -26,7 +29,7 @@ export default function BrowseCategoriesSection({
       )}
 
       <div className="grid grid-cols-2 gap-5 md:grid-cols-4 md:gap-6 lg:gap-8">
-        {browseCategories.map((category) => (
+        {categories.map((category) => (
           <CategoryBrowseCard key={category.id} category={category} />
         ))}
       </div>

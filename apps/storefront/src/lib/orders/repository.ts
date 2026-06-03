@@ -1,5 +1,5 @@
 import { readJsonStore, writeJsonStore } from "@/lib/data/jsonStore";
-import type { CreateOrderInput, Order, OrderStatus } from "@/types/order";
+import type { CreateOrderInput, Order, OrderStatus, PaymentProof } from "@/types/order";
 
 const STORE = "orders";
 
@@ -40,6 +40,13 @@ export async function findOrderById(id: string): Promise<Order | null> {
   return orders.find((o) => o.id === id) ?? null;
 }
 
+export async function listAllOrders(): Promise<Order[]> {
+  const orders = await load();
+  return orders.sort(
+    (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+  );
+}
+
 export async function listOrdersForUser(
   userId: string,
   email: string
@@ -67,6 +74,27 @@ export async function updateOrderStatus(
     ...orders[idx],
     status,
     trackingNote: trackingNote ?? orders[idx].trackingNote,
+    updatedAt: new Date().toISOString(),
+  };
+  await save(orders);
+  return orders[idx];
+}
+
+export async function attachPaymentProofToOrder(
+  orderId: string,
+  proof: PaymentProof
+): Promise<Order | null> {
+  const orders = await load();
+  const idx = orders.findIndex((o) => o.id === orderId);
+  if (idx < 0) return null;
+
+  const status =
+    orders[idx].status === "pending_payment" ? "payment_review" : orders[idx].status;
+
+  orders[idx] = {
+    ...orders[idx],
+    paymentProof: proof,
+    status,
     updatedAt: new Date().toISOString(),
   };
   await save(orders);

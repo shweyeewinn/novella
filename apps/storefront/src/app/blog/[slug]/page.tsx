@@ -1,11 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import {
-  categoryLabels,
-  getAllPosts,
-  getPostBySlug,
-} from "@/features/blog/catalog";
+import { categoryLabels } from "@/features/blog/catalog";
+import { getAllPosts, getPostBySlug } from "@/features/blog/catalogServer";
 import BlogLabel from "@/shared/components/blog/BlogLabel";
 import BlogPostMeta from "@/shared/components/blog/BlogPostMeta";
 import Breadcrumbs from "@/shared/components/ui/Breadcrumbs";
@@ -13,13 +10,16 @@ import { ButtonLink } from "@/shared/components/ui/Button";
 
 type PageProps = { params: Promise<{ slug: string }> };
 
-export function generateStaticParams() {
-  return getAllPosts().map((p) => ({ slug: p.slug }));
+export const revalidate = 60;
+
+export async function generateStaticParams() {
+  const posts = await getAllPosts();
+  return posts.map((p) => ({ slug: p.slug }));
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
-  const post = getPostBySlug(slug);
+  const post = await getPostBySlug(slug);
   if (!post) return { title: "Not found" };
   return {
     title: post.title,
@@ -29,7 +29,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
 export default async function BlogPostPage({ params }: PageProps) {
   const { slug } = await params;
-  const post = getPostBySlug(slug);
+  const post = await getPostBySlug(slug);
   if (!post) notFound();
 
   const paragraphs = post.body.split("\n\n").filter(Boolean);

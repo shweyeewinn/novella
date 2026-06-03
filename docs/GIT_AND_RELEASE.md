@@ -11,7 +11,7 @@ How to move local work to the remote repository without breaking the storefront,
 | Cart / wishlist | Zustand + `localStorage` (client only) | Unchanged |
 | Auth / orders (dev) | `.data/*.json` under storefront | **Must not** rely on JSON files in prod |
 | Checkout payment | Bank transfer + Messenger proof | Stripe (optional later) |
-| CMS | Planned `apps/strapi` | PostgreSQL + schema export |
+| CMS | `apps/strapi` (Strapi 5) | PostgreSQL + schema export in prod |
 
 Commit and PR messages should describe **what is actually merged**, not future Stripe/Strapi work unless that PR implements it.
 
@@ -26,6 +26,30 @@ Commit and PR messages should describe **what is actually merged**, not future S
 | `feature/<scope>-<short-name>` | One feature or fix (e.g. `feature/checkout-server-orders`) |
 
 Avoid long-lived branches. Rebase the feature onto `staging` before opening a PR.
+
+### Commit author (backend vs storefront)
+
+Default repo identity stays **Shwe Yee Winn** / **yonngelay@gmail.com** for UI and content work.
+
+For **backend** branches (e.g. `feature/strapi-cms-backend`), local git loads `.gitconfig-author-backend` via:
+
+```bash
+git config --local includeIf.onbranch:feature/strapi-cms-backend.path .gitconfig-author-backend
+```
+
+That sets commits on that branch to **Ye Maung Maung** / **yemaung.dev@gmail.com** automatically.
+
+Override for a single commit (e.g. a small UI fix on the same branch):
+
+```bash
+git commit --author="Shwe Yee Winn <yonngelay@gmail.com>" -m "fix(storefront): ..."
+```
+
+One-off backend commit on another branch:
+
+```bash
+git commit --author="Ye Maung Maung <yemaung.dev@gmail.com>" -m "feat(cms): ..."
+```
 
 ---
 

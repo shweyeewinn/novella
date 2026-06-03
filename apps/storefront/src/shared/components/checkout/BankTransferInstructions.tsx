@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { formatPrice } from "@/features/books/catalog";
 import { site } from "@/config/site";
 
@@ -6,14 +5,16 @@ type BankTransferInstructionsProps = {
   orderId: string;
   totalCents: number | null;
   className?: string;
+  proofSection?: React.ReactNode;
 };
 
 export default function BankTransferInstructions({
   orderId,
   totalCents,
   className = "",
+  proofSection,
 }: BankTransferInstructionsProps) {
-  const { payment, facebook } = site;
+  const { payment } = site;
 
   return (
     <div
@@ -60,29 +61,7 @@ export default function BankTransferInstructions({
         <p className="font-sans text-xs text-ink-muted">{payment.transferNote}</p>
       ) : null}
 
-      <div className="space-y-3 rounded-xl border border-primary/25 bg-paper px-5 py-4">
-        <h3 className="font-serif text-lg text-ink">After you pay</h3>
-        <ol className="list-decimal space-y-2 pl-5 font-sans text-sm leading-relaxed text-ink-muted">
-          <li>Take a screenshot or photo of your transfer receipt.</li>
-          <li>
-            Send it to us on{" "}
-            <span className="font-medium text-ink">Messenger</span> ({facebook.pageName}{" "}
-            Facebook Page) and include your order number{" "}
-            <span className="font-mono text-ink">{orderId}</span>.
-          </li>
-          <li>
-            We will confirm your payment, complete the order, and follow up about shipping.
-          </li>
-        </ol>
-        <Link
-          href={facebook.messengerUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex font-sans text-sm font-semibold text-primary transition-colors hover:text-primary-hover hover:underline"
-        >
-          Open {facebook.pageName} on Messenger →
-        </Link>
-      </div>
+      {proofSection}
     </div>
   );
 }

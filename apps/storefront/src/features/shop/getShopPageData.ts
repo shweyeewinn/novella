@@ -1,13 +1,14 @@
 import {
   categoryLabels,
   countInStockBooks,
-  defaultShopFilters,
   filterBooks,
-  getAllBooks,
-  getBooksByCollection,
   getInStockBooks,
   type ShopFilters,
 } from "@/features/books/catalog";
+import {
+  getAllBooks,
+  getBooksByCollection,
+} from "@/features/books/catalogServer";
 import type { Book, BookCategory } from "@/features/books/types";
 
 export const SHOP_PAGE_SIZE = 20;
@@ -64,12 +65,14 @@ export function parseShopFilters(params: URLSearchParams): ShopFilters {
   };
 }
 
-export function getShopPageData(params: URLSearchParams): ShopPageData {
+export async function getShopPageData(params: URLSearchParams): Promise<ShopPageData> {
   const collection = params.get("collection");
   const pageParam = Math.max(1, Number.parseInt(params.get("page") ?? "1", 10) || 1);
   const filters = parseShopFilters(params);
 
-  const base = collection ? getBooksByCollection(collection) : getAllBooks();
+  const base = collection
+    ? await getBooksByCollection(collection)
+    : await getAllBooks();
   const catalog = getInStockBooks(base);
   const inventoryCount = countInStockBooks(catalog);
   const results = filterBooks(catalog, filters);

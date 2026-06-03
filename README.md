@@ -9,7 +9,7 @@
 | Path | Purpose |
 |------|---------|
 | [`apps/storefront`](./apps/storefront) | Next.js 16 shop (React 19, Tailwind v4, Zustand cart/wishlist) |
-| [`apps/strapi`](./apps/strapi) | *(planned)* CMS, checkout validation, Stripe webhooks |
+| [`apps/strapi`](./apps/strapi) | Strapi 5 CMS (books, blog, categories, site settings) |
 
 Storefront details: [`apps/storefront/README.md`](./apps/storefront/README.md) · Performance: [`apps/storefront/PERFORMANCE.md`](./apps/storefront/PERFORMANCE.md)
 
@@ -112,7 +112,7 @@ flowchart TB
 | Server shop listing + pagination + filters | ✅ |
 | Image WebP pipeline + cache headers | ✅ |
 | Server price validation (demo) | ✅ `POST /api/checkout` |
-| Strapi CMS + DB prices | 🔜 `apps/strapi` |
+| Strapi CMS + DB prices | ✅ `apps/strapi` (storefront reads catalog via REST) |
 | Stripe Checkout + webhook | 🔜 |
 | Physical inventory + shipping | 🔜 |
 | Digital S3 presigned + email | 🔜 |

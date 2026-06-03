@@ -1,7 +1,12 @@
-import { browseCategories } from "@/features/catalog/browseCategories";
+import type { BrowseCategory } from "@/features/catalog/browseCategories";
+import { browseCategories as defaultCategories } from "@/features/catalog/browseCategories";
 import CategorySection from "@/shared/components/catalog/CategorySection";
 
-export default function CategoriesView() {
+export default function CategoriesView({
+  categories = defaultCategories,
+}: {
+  categories?: BrowseCategory[];
+}) {
   return (
     <div className="space-y-10 sm:space-y-12">
       <header className="space-y-2">
@@ -13,7 +18,7 @@ export default function CategoriesView() {
       </header>
 
       <div className="flex flex-col gap-8 sm:gap-10">
-        {browseCategories.map((category) => (
+        {categories.map((category) => (
           <CategorySection key={category.id} category={category} />
         ))}
       </div>

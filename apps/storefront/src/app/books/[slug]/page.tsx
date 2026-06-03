@@ -1,11 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import {
-  categoryLabels,
-  formatPrice,
-  getAllBooks,
-  getBookBySlug,
-} from "@/features/books/catalog";
+import { categoryLabels, formatPrice } from "@/features/books/catalog";
+import { getAllBooks, getBookBySlug } from "@/features/books/catalogServer";
 import AddToCartPanel from "@/features/books/AddToCartPanel";
 import BookCard from "@/shared/components/books/BookCard";
 import BookCover from "@/shared/components/books/BookCover";
@@ -15,13 +11,16 @@ import { bookGridClass } from "@/shared/constants/layout";
 
 type PageProps = { params: Promise<{ slug: string }> };
 
-export function generateStaticParams() {
-  return getAllBooks().map((b) => ({ slug: b.slug }));
+export const revalidate = 60;
+
+export async function generateStaticParams() {
+  const books = await getAllBooks();
+  return books.map((b) => ({ slug: b.slug }));
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
-  const book = getBookBySlug(slug);
+  const book = await getBookBySlug(slug);
   if (!book) return { title: "Not found" };
   return {
     title: book.title,
@@ -31,10 +30,11 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
 export default async function BookDetailPage({ params }: PageProps) {
   const { slug } = await params;
-  const book = getBookBySlug(slug);
+  const book = await getBookBySlug(slug);
   if (!book) notFound();
 
-  const related = getAllBooks()
+  const all = await getAllBooks();
+  const related = all
     .filter((b) => b.id !== book.id && b.category === book.category)
     .slice(0, 4);
 

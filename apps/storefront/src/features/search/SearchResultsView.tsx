@@ -2,16 +2,15 @@
 
 import { useMemo } from "react";
 import { useSearchParams } from "next/navigation";
-import { defaultShopFilters, filterBooks, getAllBooks } from "@/features/books/catalog";
+import { defaultShopFilters, filterBooks } from "@/features/books/catalog";
+import type { Book } from "@/features/books/types";
 import { useSearchState } from "@/shared/providers/SearchProvider";
 import BookCard from "@/shared/components/books/BookCard";
 import EmptyState from "@/shared/components/ui/EmptyState";
 import { bookGridClass } from "@/shared/constants/layout";
 import { ButtonLink } from "@/shared/components/ui/Button";
 
-const allBooks = getAllBooks();
-
-export default function SearchResultsView() {
+export default function SearchResultsView({ books }: { books: Book[] }) {
   const searchParams = useSearchParams();
   const search = useSearchState();
   const urlQuery = searchParams.get("q") ?? "";
@@ -20,11 +19,11 @@ export default function SearchResultsView() {
 
   const results = useMemo(
     () =>
-      filterBooks(allBooks, {
+      filterBooks(books, {
         ...defaultShopFilters,
         query: debouncedQuery,
       }),
-    [debouncedQuery]
+    [books, debouncedQuery]
   );
 
   const hasQuery = debouncedQuery.length > 0;

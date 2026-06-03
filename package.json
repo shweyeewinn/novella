@@ -5,10 +5,13 @@
   "description": "Novella — bookshop storefront and Strapi commerce backend",
   "author": "Shwe Yee Winn <yonngelay@gmail.com>",
   "workspaces": [
-    "apps/*"
+    "apps/storefront"
   ],
   "scripts": {
     "dev": "npm run dev --workspace=storefront",
+    "dev:cms": "npm run develop --prefix apps/strapi",
+    "build:cms": "npm run build --prefix apps/strapi",
+    "seed:cms": "npm run export:cms-seed --workspace=storefront && npm run develop --prefix apps/strapi",
     "build": "npm run build --workspace=storefront",
     "lint": "npm run lint --workspace=storefront",
     "lint:fix": "npm run lint:fix --workspace=storefront",

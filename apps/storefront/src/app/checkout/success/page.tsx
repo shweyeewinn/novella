@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { formatPrice } from "@/features/books/catalog";
 import { findOrderById } from "@/lib/orders/repository";
+import PaymentProofUpload from "@/features/checkout/PaymentProofUpload";
 import BankTransferInstructions from "@/shared/components/checkout/BankTransferInstructions";
 import { ButtonLink } from "@/shared/components/ui/Button";
 import { site } from "@/config/site";
@@ -23,6 +24,7 @@ export default async function CheckoutSuccessPage({
   const totalCents =
     stored?.totalCents ?? (params.total ? Number(params.total) : null);
   const email = stored?.email ?? params.email;
+  const proofUploaded = Boolean(stored?.paymentProof);
 
   return (
     <div className="mx-auto w-full max-w-2xl space-y-8">
@@ -43,8 +45,8 @@ export default async function CheckoutSuccessPage({
         </p>
         {email ? (
           <p className="font-sans text-sm text-ink-muted">
-            Confirmation details can be sent to{" "}
-            <span className="font-medium text-ink">{email}</span> once payment is verified.
+            We will email <span className="font-medium text-ink">{email}</span> when
+            we confirm your payment in our bank account.
           </p>
         ) : null}
         <p className="font-sans text-sm text-ink-muted">
@@ -59,21 +61,17 @@ export default async function CheckoutSuccessPage({
         </p>
       </div>
 
-      <BankTransferInstructions orderId={orderId} totalCents={totalCents} />
+      <BankTransferInstructions
+        orderId={orderId}
+        totalCents={totalCents}
+        proofSection={
+          <PaymentProofUpload orderId={orderId} alreadyUploaded={proofUploaded} />
+        }
+      />
 
-      <p className="font-sans text-sm text-ink-muted">
-        Once payment is done, please send the screenshot or proof of payment to the Messenger of
-        the {site.facebook.pageName} Facebook page to confirm your order and finish processing.
-      </p>
-
-      <div className="flex flex-col gap-3 sm:flex-row">
-        <ButtonLink href={site.facebook.messengerUrl} target="_blank" rel="noopener noreferrer">
-          Send proof on Messenger
-        </ButtonLink>
-        <ButtonLink variant="secondary" href="/shop">
-          Continue shopping
-        </ButtonLink>
-      </div>
+      <ButtonLink variant="secondary" href="/shop">
+        Continue shopping
+      </ButtonLink>
     </div>
   );
 }

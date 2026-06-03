@@ -28,7 +28,7 @@ function toURLSearchParams(
 
 async function ShopPageInner({ searchParams }: ShopPageProps) {
   const resolved = await searchParams;
-  const data = getShopPageData(toURLSearchParams(resolved));
+  const data = await getShopPageData(toURLSearchParams(resolved));
   return <ShopPageContent data={data} />;
 }
 

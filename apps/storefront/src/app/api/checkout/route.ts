@@ -1,6 +1,6 @@
 import { getSessionUserId } from "@/lib/auth/session";
 import { isShippingComplete } from "@/lib/auth/shipping";
-import { getBookById } from "@/features/books/catalog";
+import { getBookById } from "@/features/books/catalogServer";
 import { createOrder, createOrderId } from "@/lib/orders/repository";
 import { jsonError, jsonOk, parseJsonBody } from "@/lib/api/response";
 import type { ShippingAddress } from "@/types/auth";
@@ -40,7 +40,7 @@ export async function POST(request: Request) {
       return jsonError("Invalid line item", 400);
     }
 
-    const book = getBookById(id);
+    const book = await getBookById(id);
     if (!book) {
       return jsonError(`Unknown book: ${id}`, 400);
     }

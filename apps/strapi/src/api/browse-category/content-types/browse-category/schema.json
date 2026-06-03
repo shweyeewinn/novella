@@ -1,0 +1,44 @@
+{
+  "kind": "collectionType",
+  "collectionName": "browse_categories",
+  "info": {
+    "singularName": "browse-category",
+    "pluralName": "browse-categories",
+    "displayName": "Browse category",
+    "description": "Home and /categories shelf tiles"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "attributes": {
+    "categoryId": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    },
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "href": {
+      "type": "string",
+      "required": true
+    },
+    "imageSrc": {
+      "type": "string"
+    },
+    "hue": {
+      "type": "integer",
+      "default": 200
+    },
+    "sortOrder": {
+      "type": "integer",
+      "default": 0
+    },
+    "children": {
+      "type": "component",
+      "repeatable": true,
+      "component": "category.browse-subcategory"
+    }
+  }
+}
