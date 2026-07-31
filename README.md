@@ -205,10 +205,3 @@ Blog and full catalog will move to **Strapi** later; mock posts and static book 
 
 Checkout sends `POST /api/checkout` with `{ items: [{ id, quantity }] }` only — prices are computed on the server from the catalog (Strapi later).
 
-## Git identity (local to this machine)
-
-```bash
-cd "/Users/yemaung/Documents/Shwe Portfolio/novella"
-git config user.name "Shwe Yee Winn"
-git config user.email "yonngelay@gmail.com"
-```
