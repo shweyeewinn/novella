@@ -205,3 +205,11 @@ Blog and full catalog will move to **Strapi** later; mock posts and static book 
 
 Checkout sends `POST /api/checkout` with `{ items: [{ id, quantity }] }` only — prices are computed on the server from the catalog (Strapi later).
 
+## Author
+
+**Shwe Yee Winn**
+Senior Frontend Developer · 9+ years of experience
+Specialising in React, TypeScript, and Financial / E-commerce Scalability
+
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-shweyeewinn-0a66c2?logo=linkedin)](https://www.linkedin.com/in/shweyeewinn/)
+
